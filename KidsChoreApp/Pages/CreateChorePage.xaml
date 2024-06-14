@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KidsChoreApp.Pages.CreateChorePage">
+    
+    <StackLayout Padding="10">
+        <Entry x:Name="ChoreNameEntry" Placeholder="Chore Name" />
+        <Editor x:Name="DescriptionEditor" Placeholder="Description" />
+        <Entry x:Name="AssignedToEntry" Placeholder="Assigned To" />
+        <DatePicker x:Name="DeadlinePicker" />
+        <Stepper x:Name="PriorityStepper" Minimum="1" Maximum="5" Increment="1" />
+        <Button Text="Save" Clicked="OnSaveClicked" />
+    </StackLayout>
+    
+</ContentPage>

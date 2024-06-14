@@ -3,13 +3,21 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:KidsChoreApp.Pages"
        x:Class="KidsChoreApp.AppShell">
-
+    
     <FlyoutItem Title="Home" Icon="icon_home.png">
         <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
     </FlyoutItem>
     
-    <FlyoutItem Title="Chores" Icon="icon_chores.png">
-        <ShellContent ContentTemplate="{DataTemplate local:ChoresPage}" />
+    <FlyoutItem Title="Login" Icon="icon_login.png">
+        <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="View Chores" Icon="icon_chores.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ViewChoresPage}" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Create Chore" Icon="icon_create.png">
+        <ShellContent ContentTemplate="{DataTemplate local:CreateChorePage}" />
     </FlyoutItem>
     
     <FlyoutItem Title="Family Members" Icon="icon_family.png">
