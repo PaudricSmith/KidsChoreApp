@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:KidsChoreApp.Pages"
+       x:Class="KidsChoreApp.AppShell">
+
+    <FlyoutItem Title="Home" Icon="icon_home.png">
+        <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Chores" Icon="icon_chores.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ChoresPage}" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Family Members" Icon="icon_family.png">
+        <ShellContent ContentTemplate="{DataTemplate local:FamilyPage}" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Progress" Icon="icon_progress.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ProgressPage}" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Settings" Icon="icon_settings.png">
+        <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}" />
+    </FlyoutItem>
+    
+</Shell>
