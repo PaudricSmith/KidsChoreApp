@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KidsChoreApp.Pages.RegisterPage">
+    
+    <StackLayout Padding="20">
+    
+        <Label Text="Register" FontSize="24" HorizontalOptions="Center" />
+
+        <Entry x:Name="FamilyIdEntry" Placeholder="Family ID" />
+        <Label x:Name="FamilyIdErrorLabel" TextColor="Red" IsVisible="False" />
+        <Label x:Name="FamilyIdExistsLabel" TextColor="Red" IsVisible="False" />
+
+        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" />
+        <Label x:Name="PasswordErrorLabel" TextColor="Red" IsVisible="False" />
+
+        <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm Password" IsPassword="True" />
+        <Label x:Name="ConfirmPasswordErrorLabel" TextColor="Red" IsVisible="False" />
+
+        <Label Text="Tip: Write down your Family ID and Password somewhere safe." 
+               TextColor="Gray" FontSize="12" HorizontalOptions="Center" Margin="0,10,0,20"/>
+
+        <StackLayout Orientation="Vertical" Spacing="10" HorizontalOptions="Center">
+            <Button Text="Register" Clicked="OnRegisterClicked" WidthRequest="200" />
+            <Button Text="Go to Login" Clicked="OnGoToLoginClicked" WidthRequest="200" />
+        </StackLayout>
+
+    </StackLayout>
+    
+</ContentPage>

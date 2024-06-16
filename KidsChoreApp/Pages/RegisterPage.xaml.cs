@@ -4,25 +4,27 @@ using System.Text.RegularExpressions;
 
 namespace KidsChoreApp.Pages
 {
-    public partial class LoginPage : ContentPage
+    public partial class RegisterPage : ContentPage
     {
         private readonly AuthenticationService _authService;
 
 
-        public LoginPage(AuthenticationService authService)
+        public RegisterPage(AuthenticationService authService)
         {
             InitializeComponent();
             _authService = authService;
         }
 
 
-        private async void OnLoginClicked(object sender, EventArgs e)
+        private async void OnRegisterClicked(object sender, EventArgs e)
         {
             FamilyIdErrorLabel.IsVisible = false;
             PasswordErrorLabel.IsVisible = false;
+            ConfirmPasswordErrorLabel.IsVisible = false;
 
             var familyId = FamilyIdEntry.Text;
             var password = PasswordEntry.Text;
+            var confirmPassword = ConfirmPasswordEntry.Text;
 
             bool isValid = true;
 
@@ -40,25 +42,35 @@ namespace KidsChoreApp.Pages
                 isValid = false;
             }
 
+            if (password != confirmPassword)
+            {
+                ConfirmPasswordErrorLabel.Text = "Passwords do not match.";
+                ConfirmPasswordErrorLabel.IsVisible = true;
+                isValid = false;
+            }
+
             if (!isValid)
             {
                 return;
             }
 
-            var success = await _authService.LoginAsync(familyId, password);
+            var success = await _authService.RegisterAsync(familyId, password);
             if (success)
             {
-                Application.Current.MainPage = new AppShell();
+                await DisplayAlert("Success", "Registration successful", "OK");
+                await Navigation.PopAsync();
             }
             else
             {
-                await DisplayAlert("Error", "Invalid login. Please check your Family ID and Password.", "OK");
+                await DisplayAlert("Error", "Registration failed. Family ID might already be taken.", "OK");
+                //FamilyIdExistsLabel.Text = "This Family ID already exists.";
+                //FamilyIdExistsLabel.IsVisible = true;
             }
         }
 
-        private async void OnGoToRegisterClicked(object sender, EventArgs e)
+        private async void OnGoToLoginClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new RegisterPage(_authService));
+            await Navigation.PopAsync();
         }
     }
 }

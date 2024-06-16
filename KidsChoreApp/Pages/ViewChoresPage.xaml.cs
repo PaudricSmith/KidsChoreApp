@@ -1,5 +1,6 @@
 using KidsChoreApp.Services;
 using KidsChoreApp.Models;
+using UIKit;
 
 
 namespace KidsChoreApp.Pages
@@ -26,8 +27,20 @@ namespace KidsChoreApp.Pages
         private async void OnChoreTapped(object sender, ItemTappedEventArgs e)
         {
             var chore = (Chore)e.Item;
-            // Navigate to chore detail or edit page
-            // await Navigation.PushAsync(new EditChorePage(_choreDatabase, chore));
+
+            bool markAsComplete = await DisplayAlert("Complete Chore", "Do you want to mark this chore as complete?", "Yes", "No");
+            if (markAsComplete)
+            {
+                chore.IsComplete = true;
+
+                await _choreDatabase.SaveChoreAsync(chore);
+                LoadChores();
+            }
+        }
+
+        private async void OnAddChoreClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new CreateChorePage(_choreDatabase));
         }
     }
 }

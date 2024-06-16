@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KidsChoreApp.Pages.CreateFamilyMemberPage">
+    
+    <StackLayout Padding="20">
+        <Entry x:Name="FamilyMemberNameEntry" Placeholder="Family Member Name" />
+        <Picker x:Name="RolePicker">
+            <Picker.Items>
+                <x:String>Parent</x:String>
+                <x:String>Child</x:String>
+            </Picker.Items>
+        </Picker>
+        <Button Text="Save" Clicked="OnSaveClicked" />
+    </StackLayout>
+    
+</ContentPage>

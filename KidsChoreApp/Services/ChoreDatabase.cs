@@ -9,9 +9,9 @@ namespace KidsChoreApp.Services
         private readonly SQLiteAsyncConnection _database;
 
 
-        public ChoreDatabase(string dbPath)
+        public ChoreDatabase(SQLiteAsyncConnection database)
         {
-            _database = new SQLiteAsyncConnection(dbPath);
+            _database = database;
             _database.CreateTableAsync<Chore>().Wait();
         }
 
@@ -19,6 +19,11 @@ namespace KidsChoreApp.Services
         public Task<List<Chore>> GetChoresAsync()
         {
             return _database.Table<Chore>().ToListAsync();
+        }
+
+        public Task<Chore> GetChoreAsync(int id)
+        {
+            return _database.Table<Chore>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
         public Task<int> SaveChoreAsync(Chore chore)

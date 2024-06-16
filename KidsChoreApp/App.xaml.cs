@@ -11,12 +11,12 @@ namespace KidsChoreApp
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            //MainPage = new AppShell();
 
 
             // Uncomment this to show the login screen first *******************************
-            //ServiceProvider = serviceProvider;
-            //MainPage = new NavigationPage(ServiceProvider.GetService<LoginPage>());
+            ServiceProvider = serviceProvider;
+            MainPage = new NavigationPage(ServiceProvider.GetService<LoginPage>());
         }
     }
 }

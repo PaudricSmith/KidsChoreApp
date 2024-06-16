@@ -1,6 +1,9 @@
 ﻿using KidsChoreApp.Pages;
 using KidsChoreApp.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SQLite;
+using System.Runtime.ConstrainedExecution;
 
 
 namespace KidsChoreApp
@@ -10,6 +13,12 @@ namespace KidsChoreApp
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
+#if DEBUG
+            builder.Logging.AddDebug();
+#endif
+
+
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
@@ -18,26 +27,26 @@ namespace KidsChoreApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            // Initialize SQLitePCLRaw
+            SQLitePCL.Batteries_V2.Init();
 
             // Sqlite DB
-            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "chores.db3");
-            builder.Services.AddSingleton<ChoreDatabase>(s => ActivatorUtilities.CreateInstance<ChoreDatabase>(s, dbPath));
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "kidschoreapp.db3");
+            builder.Services.AddSingleton<SQLiteAsyncConnection>(s => new SQLiteAsyncConnection(dbPath));
 
+            // Register Services
+            builder.Services.AddSingleton<AuthenticationService>();
+            builder.Services.AddSingleton<ChoreDatabase>();
+            builder.Services.AddSingleton<FamilyMemberDatabase>();
 
             // Register pages
+            builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<CreateChorePage>();
             builder.Services.AddTransient<ViewChoresPage>();
+            builder.Services.AddTransient<CreateFamilyMemberPage>();
+            builder.Services.AddTransient<ViewFamilyMembersPage>();
 
-
-            // Add Services here
-            builder.Services.AddSingleton<AuthenticationService>();
-            //builder.Services.AddSingleton<ChoreService>();
-
-
-#if DEBUG
-            builder.Logging.AddDebug();
-#endif
 
             var mauiApp = builder.Build();
 

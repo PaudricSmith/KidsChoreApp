@@ -11,19 +11,15 @@
     <FlyoutItem Title="Login" Icon="icon_login.png">
         <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
     </FlyoutItem>
-    
-    <FlyoutItem Title="View Chores" Icon="icon_chores.png">
+
+    <FlyoutItem Title="Chores" Icon="icon_chores.png">
         <ShellContent ContentTemplate="{DataTemplate local:ViewChoresPage}" />
     </FlyoutItem>
-    
-    <FlyoutItem Title="Create Chore" Icon="icon_create.png">
-        <ShellContent ContentTemplate="{DataTemplate local:CreateChorePage}" />
-    </FlyoutItem>
-    
+
     <FlyoutItem Title="Family Members" Icon="icon_family.png">
-        <ShellContent ContentTemplate="{DataTemplate local:FamilyPage}" />
+        <ShellContent ContentTemplate="{DataTemplate local:ViewFamilyMembersPage}" />
     </FlyoutItem>
-    
+
     <FlyoutItem Title="Progress" Icon="icon_progress.png">
         <ShellContent ContentTemplate="{DataTemplate local:ProgressPage}" />
     </FlyoutItem>

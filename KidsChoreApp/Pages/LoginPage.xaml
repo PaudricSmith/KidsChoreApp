@@ -2,12 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KidsChoreApp.Pages.LoginPage">
-    
-    <StackLayout Padding="10">
+
+    <StackLayout Padding="20" VerticalOptions="CenterAndExpand">
+        
+        <Label Text="Login" FontSize="24" HorizontalOptions="Center" />
+
         <Entry x:Name="FamilyIdEntry" Placeholder="Family ID" />
+        <Label x:Name="FamilyIdErrorLabel" TextColor="Red" IsVisible="False" />
+
         <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" />
-        <Button Text="Login" Clicked="OnLoginClicked" />
-        <Button Text="Register" Clicked="OnRegisterClicked" />
+        <Label x:Name="PasswordErrorLabel" TextColor="Red" IsVisible="False" />
+
+        <StackLayout Orientation="Vertical" Spacing="10" HorizontalOptions="Center">
+            <Button Text="Login" Clicked="OnLoginClicked" WidthRequest="200" />
+            <Button Text="Go to Register" Clicked="OnGoToRegisterClicked" WidthRequest="200" />
+        </StackLayout>
+
     </StackLayout>
-    
 </ContentPage>

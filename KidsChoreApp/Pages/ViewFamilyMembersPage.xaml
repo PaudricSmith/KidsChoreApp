@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KidsChoreApp.Pages.ViewChoresPage">
-
-    <StackLayout Padding="10">
-        <ListView x:Name="ChoresListView" ItemTapped="OnChoreTapped">
+             x:Class="KidsChoreApp.Pages.ViewFamilyMembersPage">
+    
+    <StackLayout Padding="20">
+        <ListView x:Name="FamilyMembersListView" ItemTapped="OnFamilyMemberTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}" Detail="{Binding Description}" />
+                    <TextCell Text="{Binding Name}" Detail="{Binding Role}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Text="Add Chore" Clicked="OnAddChoreClicked" />
+        <Button Text="Add Family Member" Clicked="OnAddFamilyMemberClicked" />
     </StackLayout>
     
 </ContentPage>
