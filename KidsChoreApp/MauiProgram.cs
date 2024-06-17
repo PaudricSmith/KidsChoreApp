@@ -1,9 +1,7 @@
 ﻿using KidsChoreApp.Pages;
 using KidsChoreApp.Services;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SQLite;
-using System.Runtime.ConstrainedExecution;
 
 
 namespace KidsChoreApp

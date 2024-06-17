@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KidsChoreApp.Pages.DebugPage">
+
+    <StackLayout Padding="20">
+        <Button Text="Clear Preferences" Clicked="OnClearPreferencesClicked" />
+        <Button Text="Delete Database file" Clicked="OnDeleteDatabaseClicked" />
+    </StackLayout>
+
+</ContentPage>

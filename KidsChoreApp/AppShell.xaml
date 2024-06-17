@@ -23,9 +23,10 @@
     <FlyoutItem Title="Progress" Icon="icon_progress.png">
         <ShellContent ContentTemplate="{DataTemplate local:ProgressPage}" />
     </FlyoutItem>
-    
-    <FlyoutItem Title="Settings" Icon="icon_settings.png">
-        <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}" />
-    </FlyoutItem>
-    
+
+    <!-- Hidden debug option -->
+    <ShellItem Title="Debug Page" Route="debug" IsVisible="False">
+        <ShellContent Title="Debug" ContentTemplate="{DataTemplate local:DebugPage}" />
+    </ShellItem>
+
 </Shell>
