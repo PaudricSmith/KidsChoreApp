@@ -42,5 +42,11 @@ namespace KidsChoreApp.Services
         {
             return _database.DeleteAsync(member);
         }
+
+        public async Task<bool> FamilyMemberExistsAsync(string name)
+        {
+            var member = await _database.Table<FamilyMember>().Where(m => m.Name == name).FirstOrDefaultAsync();
+            return member != null;
+        }
     }
 }
