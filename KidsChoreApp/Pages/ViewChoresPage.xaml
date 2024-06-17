@@ -3,11 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KidsChoreApp.Pages.ViewChoresPage">
 
-    <StackLayout Padding="10">
+    <StackLayout Padding="20">
         <ListView x:Name="ChoresListView" ItemTapped="OnChoreTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}" Detail="{Binding Description}" />
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Name}" VerticalOptions="Center" />
+                            <Label Text="✓" IsVisible="{Binding IsComplete}" TextColor="Green" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

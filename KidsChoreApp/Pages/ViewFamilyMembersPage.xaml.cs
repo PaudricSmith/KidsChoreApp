@@ -39,5 +39,11 @@ namespace KidsChoreApp.Pages
         {
             await Navigation.PushAsync(new CreateFamilyMemberPage(_familyMemberDatabase));
         }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            LoadFamilyMembers();
+        }
     }
 }

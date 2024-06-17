@@ -21,6 +21,18 @@ namespace KidsChoreApp.Pages
             FamilyIdErrorLabel.IsVisible = false;
             PasswordErrorLabel.IsVisible = false;
 
+
+
+            // *************************************************************************
+            // Just for development to quickly login in 
+
+                FamilyIdEntry.Text = "SmithFamily";
+                PasswordEntry.Text = "Password1";
+
+            // *************************************************************************
+
+
+
             var familyId = FamilyIdEntry.Text;
             var password = PasswordEntry.Text;
 

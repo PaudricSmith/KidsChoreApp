@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KidsChoreApp.Pages.ChoreDetailsPage">
+
+    <StackLayout Padding="20" VerticalOptions="CenterAndExpand" >
+        <Label Text="Chore Details" FontSize="24" HorizontalOptions="Center" />
+        <Label Text="Name:" FontSize="18" FontAttributes="Bold"  />
+        <Label Text="{Binding Name}" FontSize="18" />
+        <Label Text="Description:" FontSize="18" FontAttributes="Bold" />
+        <Label Text="{Binding Description}" FontSize="18" />
+        <Label Text="Assigned To:" FontSize="18" FontAttributes="Bold" />
+        <Label Text="{Binding AssignedTo}" FontSize="18" />
+        <Label Text="Deadline:" FontSize="18" FontAttributes="Bold" />
+        <Label Text="{Binding Deadline, StringFormat='{0:MM/dd/yyyy}'}" FontSize="18" />
+        <Label Text="Priority:" FontSize="18" FontAttributes="Bold" />
+        <Label Text="{Binding Priority}" FontSize="18" />
+        
+        <Button Text="Mark as Complete" Clicked="OnMarkAsCompleteClicked" IsVisible="{Binding IsIncomplete}" />
+        <Button Text="Mark as Uncompleted" Clicked="OnMarkAsUncompleteClicked" IsVisible="{Binding IsIncomplete}" />
+        <Button Text="Delete" Clicked="OnDeleteClicked" TextColor="Red" />
+    </StackLayout>
+    
+</ContentPage>

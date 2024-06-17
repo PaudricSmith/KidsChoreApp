@@ -3,12 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KidsChoreApp.Pages.CreateChorePage">
     
-    <StackLayout Padding="10">
+    <StackLayout Padding="20">
         <Entry x:Name="ChoreNameEntry" Placeholder="Chore Name" />
         <Editor x:Name="DescriptionEditor" Placeholder="Description" />
-        <Entry x:Name="AssignedToEntry" Placeholder="Assigned To" />
+        <Picker x:Name="AssignedToPicker" Title="Assign To">
+            <Picker.Items>
+                <x:String>Family Member 1</x:String>
+                <x:String>Family Member 2</x:String>
+            </Picker.Items>
+        </Picker>
+
         <DatePicker x:Name="DeadlinePicker" />
-        <Stepper x:Name="PriorityStepper" Minimum="1" Maximum="5" Increment="1" />
+        
+        <Label Text="Priority" />
+        <StackLayout Orientation="Horizontal">
+            <Stepper x:Name="PriorityStepper" Minimum="1" Maximum="5" Increment="1" />
+            <Label Text="{Binding Source={x:Reference PriorityStepper}, Path=Value}" VerticalOptions="Center" FontSize="Large" BackgroundColor="Cyan" />
+        </StackLayout>
+        
         <Button Text="Save" Clicked="OnSaveClicked" />
     </StackLayout>
     
