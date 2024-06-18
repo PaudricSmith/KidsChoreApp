@@ -1,8 +1,7 @@
 using KidsChoreApp.Services;
-using System.Text.RegularExpressions;
 
 
-namespace KidsChoreApp.Pages
+namespace KidsChoreApp.Pages.Authentication
 {
     public partial class LoginPage : ContentPage
     {
@@ -26,7 +25,7 @@ namespace KidsChoreApp.Pages
             // *************************************************************************
             // Just for development to quickly login in 
 
-                FamilyIdEntry.Text = "SmithFamily";
+                FamilyIdEntry.Text = "TestFamily";
                 PasswordEntry.Text = "Password1";
 
             // *************************************************************************

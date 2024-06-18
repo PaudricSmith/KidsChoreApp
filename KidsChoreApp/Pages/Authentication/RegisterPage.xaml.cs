@@ -2,7 +2,7 @@ using KidsChoreApp.Services;
 using System.Text.RegularExpressions;
 
 
-namespace KidsChoreApp.Pages
+namespace KidsChoreApp.Pages.Authentication
 {
     public partial class RegisterPage : ContentPage
     {

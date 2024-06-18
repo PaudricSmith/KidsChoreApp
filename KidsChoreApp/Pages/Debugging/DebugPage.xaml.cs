@@ -1,6 +1,6 @@
 
 
-namespace KidsChoreApp.Pages
+namespace KidsChoreApp.Pages.Debugging
 {
     public partial class DebugPage : ContentPage
     {

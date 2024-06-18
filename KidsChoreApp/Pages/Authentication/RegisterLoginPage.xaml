@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KidsChoreApp.Pages.Authentication.RegisterLoginPage">
+
+    <StackLayout Padding="20" VerticalOptions="CenterAndExpand">
+        <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" />
+        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" />
+        <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm Password" IsPassword="True" IsVisible="False" />
+        <Button x:Name="MainActionButton" Text="Register" Clicked="OnMainActionButtonClicked" />
+        <Label x:Name="ToggleLink" Text="or Login" TextColor="Blue" HorizontalOptions="Center" VerticalOptions="Center" />
+        <ImageButton x:Name="PasswordToggle" Source="eye.png" Clicked="OnPasswordToggleClicked" />
+        <Label Text="How to use app with whole family" TextColor="Blue" HorizontalOptions="Center" VerticalOptions="End"/>
+        <!--Clicked="OnHowToUseClicked"--> 
+    </StackLayout>
+    
+</ContentPage>

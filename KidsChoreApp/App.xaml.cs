@@ -1,4 +1,4 @@
-﻿using KidsChoreApp.Pages;
+﻿using KidsChoreApp.Pages.Authentication;
 
 
 namespace KidsChoreApp

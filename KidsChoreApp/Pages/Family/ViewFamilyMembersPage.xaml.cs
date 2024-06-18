@@ -2,7 +2,7 @@ using KidsChoreApp.Services;
 using KidsChoreApp.Models;
 
 
-namespace KidsChoreApp.Pages
+namespace KidsChoreApp.Pages.Family
 {
     public partial class ViewFamilyMembersPage : ContentPage
     {

@@ -1,4 +1,7 @@
 ﻿using KidsChoreApp.Pages;
+using KidsChoreApp.Pages.Authentication;
+using KidsChoreApp.Pages.Chores;
+using KidsChoreApp.Pages.Family;
 using KidsChoreApp.Services;
 using Microsoft.Extensions.Logging;
 using SQLite;

@@ -2,31 +2,33 @@
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:KidsChoreApp.Pages"
+       xmlns:auth="clr-namespace:KidsChoreApp.Pages.Authentication"
+       xmlns:chores="clr-namespace:KidsChoreApp.Pages.Chores"
+       xmlns:family="clr-namespace:KidsChoreApp.Pages.Family"
+       xmlns:debugging="clr-namespace:KidsChoreApp.Pages.Debugging"
        x:Class="KidsChoreApp.AppShell">
+    
     
     <FlyoutItem Title="Home" Icon="icon_home.png">
         <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
     </FlyoutItem>
     
     <FlyoutItem Title="Login" Icon="icon_login.png">
-        <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
+        <ShellContent ContentTemplate="{DataTemplate auth:LoginPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Chores" Icon="icon_chores.png">
-        <ShellContent ContentTemplate="{DataTemplate local:ViewChoresPage}" />
+        <ShellContent ContentTemplate="{DataTemplate chores:ViewChoresPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Family Members" Icon="icon_family.png">
-        <ShellContent ContentTemplate="{DataTemplate local:ViewFamilyMembersPage}" />
+        <ShellContent ContentTemplate="{DataTemplate family:ViewFamilyMembersPage}" />
     </FlyoutItem>
-
-    <FlyoutItem Title="Progress" Icon="icon_progress.png">
-        <ShellContent ContentTemplate="{DataTemplate local:ProgressPage}" />
-    </FlyoutItem>
+    
 
     <!-- Hidden debug option -->
     <ShellItem Title="Debug Page" Route="debug" IsVisible="False">
-        <ShellContent Title="Debug" ContentTemplate="{DataTemplate local:DebugPage}" />
+        <ShellContent Title="Debug" ContentTemplate="{DataTemplate debugging:DebugPage}" />
     </ShellItem>
 
 </Shell>
