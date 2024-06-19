@@ -1,10 +1,10 @@
-﻿using KidsChoreApp.Pages;
-using KidsChoreApp.Pages.Authentication;
+﻿using KidsChoreApp.Pages.Authentication;
 using KidsChoreApp.Pages.Chores;
 using KidsChoreApp.Pages.Family;
 using KidsChoreApp.Services;
 using Microsoft.Extensions.Logging;
 using SQLite;
+using MauiIcons.Fluent;
 
 
 namespace KidsChoreApp
@@ -14,6 +14,7 @@ namespace KidsChoreApp
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
 
 #if DEBUG
             builder.Logging.AddDebug();
@@ -26,7 +27,9 @@ namespace KidsChoreApp
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                })
+                .UseFluentMauiIcons();
+
 
             // Initialize SQLitePCLRaw
             SQLitePCL.Batteries_V2.Init();
@@ -43,6 +46,7 @@ namespace KidsChoreApp
             // Register pages
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<RegisterLoginPage>();
             builder.Services.AddTransient<CreateChorePage>();
             builder.Services.AddTransient<ViewChoresPage>();
             builder.Services.AddTransient<ChoreDetailsPage>();

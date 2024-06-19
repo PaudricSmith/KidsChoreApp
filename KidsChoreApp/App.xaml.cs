@@ -16,7 +16,7 @@ namespace KidsChoreApp
 
             // Uncomment this to show the login screen first *******************************
             ServiceProvider = serviceProvider;
-            MainPage = new NavigationPage(ServiceProvider.GetService<LoginPage>());
+            MainPage = new NavigationPage(ServiceProvider.GetService<RegisterLoginPage>());
         }
     }
 }

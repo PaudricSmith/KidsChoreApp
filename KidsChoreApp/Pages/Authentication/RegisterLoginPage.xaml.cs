@@ -1,3 +1,5 @@
+using MauiIcons.Core;
+using MauiIcons.Fluent;
 using Microsoft.Maui.Controls;
 using System;
 
@@ -7,15 +9,29 @@ namespace KidsChoreApp.Pages.Authentication
     public partial class RegisterLoginPage : ContentPage
     {
         private bool _isRegistering = true;
+        private FluentIcons _eyeOpenedIcon;
+        private FluentIcons _eyeClosedIcon;
 
 
         public RegisterLoginPage()
         {
             InitializeComponent();
+
             ToggleLink.GestureRecognizers.Add(new TapGestureRecognizer
             {
                 Command = new Command(ToggleRegisterLogin)
             });
+
+            AppTip.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command(OnHowToUseClicked)
+            });
+
+
+            _eyeOpenedIcon = FluentIcons.Eye16;
+            _eyeClosedIcon = FluentIcons.EyeOff16;
+
+            PasswordToggle.Source = _eyeClosedIcon.ToImageSource();
         }
 
 
@@ -25,6 +41,11 @@ namespace KidsChoreApp.Pages.Authentication
             ConfirmPasswordEntry.IsVisible = _isRegistering;
             MainActionButton.Text = _isRegistering ? "Register" : "Login";
             ToggleLink.Text = _isRegistering ? "or Login" : "or Create a new account";
+        }
+
+        private void OnHowToUseClicked()
+        {
+            DisplayAlert("How to use app with whole family", "Tips on using the app with your family...", "OK");
         }
 
         private async void OnMainActionButtonClicked(object sender, EventArgs e)
@@ -51,12 +72,7 @@ namespace KidsChoreApp.Pages.Authentication
         {
             PasswordEntry.IsPassword = !PasswordEntry.IsPassword;
             ConfirmPasswordEntry.IsPassword = !ConfirmPasswordEntry.IsPassword;
-            PasswordToggle.Source = PasswordEntry.IsPassword ? "eye.png" : "eye-off.png";
-        }
-
-        private async void OnHowToUseClicked(object sender, EventArgs e)
-        {
-            await DisplayAlert("How to use app with whole family", "Tips on using the app with your family...", "OK");
+            PasswordToggle.Source = PasswordEntry.IsPassword ? _eyeClosedIcon.ToImageSource() : _eyeOpenedIcon.ToImageSource();
         }
     }
 }
