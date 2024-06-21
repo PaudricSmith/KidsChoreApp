@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
              x:Class="KidsChoreApp.Pages.Authentication.RegisterLoginPage">
+
+    <ContentPage.Resources>
+        <Style TargetType="ImageButton">
+            <Style.Triggers>
+                <DataTrigger TargetType="ImageButton" Binding="{Binding Source={x:Reference PasswordEntry}, Path=IsPassword}" Value="False">
+                    <Setter Property="Source" Value="{StaticResource EyeOpenIcon}" />
+                </DataTrigger>
+                <DataTrigger TargetType="ImageButton" Binding="{Binding Source={x:Reference PasswordEntry}, Path=IsPassword}" Value="True">
+                    <Setter Property="Source" Value="{StaticResource EyeClosedIcon}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </ContentPage.Resources>
 
     <Grid Padding="20" VerticalOptions="CenterAndExpand" RowSpacing="20">
         <Grid.RowDefinitions>
@@ -16,26 +28,40 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" Grid.Row="0" Grid.ColumnSpan="2" />
-
-        <Grid Grid.Row="1" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" Grid.Column="0" />
-            <ImageButton x:Name="PasswordToggle" Scale="0.75" Clicked="OnPasswordToggleClicked" Source="{Binding _eyeOpenedIcon}" Grid.Column="1" />
+        <!-- Email Entry and Error Label -->
+        <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="Center">
+            <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" WidthRequest="300" />
+            <Label x:Name="EmailErrorLabel" TextColor="Red" IsVisible="False" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="Center" />
         </Grid>
 
-        <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm Password" IsPassword="True" Grid.Row="2" Grid.ColumnSpan="2" />
+        <!-- Password Entry with Toggle Button -->
+        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" WidthRequest="300" HorizontalOptions="FillAndExpand" />
+        <ImageButton x:Name="PasswordToggle" Clicked="OnPasswordEyeToggleClicked" Grid.Row="1" Grid.Column="4" VerticalOptions="Center" />
+        <Label x:Name="PasswordErrorLabel" TextColor="Red" IsVisible="False" Grid.Row="1" Grid.ColumnSpan="1" HorizontalOptions="Center" />
 
-        <Button x:Name="MainActionButton" Text="Register" Clicked="OnMainActionButtonClicked" Grid.Row="3" Grid.ColumnSpan="2" />
+        <!-- Confirm Password Entry and Error Label -->
+        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="Center">
+            <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm Password" IsPassword="True" WidthRequest="300" />
+            <Label x:Name="ConfirmPasswordErrorLabel" TextColor="Red" IsVisible="False" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="Center" />
+        </Grid>
 
-        <Label x:Name="ToggleLink" Text="or Login" TextColor="Blue" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="4" Grid.ColumnSpan="2" />
+        <!-- Main Action Button -->
+        <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="Center">
+            <Button x:Name="MainActionButton" Text="Login" Clicked="OnMainActionButtonClicked" WidthRequest="300" />
+        </Grid>
 
-        <Label x:Name="AppTip" Text="How to use app with whole family" TextColor="Blue" HorizontalOptions="Center" VerticalOptions="End" Grid.Row="5" Grid.ColumnSpan="2" />
+        <!-- Toggle Link and App Tip -->
+        <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="Center">
+            <Label x:Name="ToggleLink" Text="or Create a new account" TextColor="Blue" HorizontalOptions="Center" />
+        </Grid>
+        <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="End">
+            <Label x:Name="AppTip" Text="How to use app with whole family" TextColor="Blue" HorizontalOptions="Center" />
+        </Grid>
 
     </Grid>
 

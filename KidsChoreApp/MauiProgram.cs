@@ -44,8 +44,6 @@ namespace KidsChoreApp
             builder.Services.AddSingleton<FamilyMemberDatabase>();
 
             // Register pages
-            builder.Services.AddTransient<RegisterPage>();
-            builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<RegisterLoginPage>();
             builder.Services.AddTransient<CreateChorePage>();
             builder.Services.AddTransient<ViewChoresPage>();
