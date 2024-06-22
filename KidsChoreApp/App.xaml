@@ -15,7 +15,11 @@
             <!-- Define the password eye icons as FontImageSource resources here -->
             <FontImageSource x:Key="EyeOpenIcon" Glyph="{mi:Fluent Icon=Eye24}" FontFamily="FluentIcons" Size="32" Color="Black" />
             <FontImageSource x:Key="EyeClosedIcon" Glyph="{mi:Fluent Icon=EyeOff24}" FontFamily="FluentIcons" Size="32" Color="Black" />
-            
+
+            <!-- Define the padlock icons as FontImageSource resources here -->
+            <FontImageSource x:Key="LockOpenIcon" Glyph="{mi:Fluent Icon=LockOpen24}" FontFamily="FluentIcons" Size="32" Color="Black" />
+            <FontImageSource x:Key="LockClosedIcon" Glyph="{mi:Fluent Icon=LockClosed24}" FontFamily="FluentIcons" Size="32" Color="Black" />
+
         </ResourceDictionary>
     </Application.Resources>
     

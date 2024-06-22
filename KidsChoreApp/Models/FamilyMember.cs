@@ -8,6 +8,8 @@ namespace KidsChoreApp.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Role { get; set; } // Parent or Child
+        public string Image { get; set; }
+        public decimal Money { get; set; }
+        public string Passcode { get; set; } // Passcode for accessing the child's page
     }
 }

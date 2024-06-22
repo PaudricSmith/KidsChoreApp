@@ -11,17 +11,9 @@
     <FlyoutItem Title="Home" Icon="icon_home.png">
         <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
     </FlyoutItem>
-    
-    <FlyoutItem Title="Login" Icon="icon_login.png">
+
+    <FlyoutItem Title="Register/Login" Icon="icon_login.png">
         <ShellContent ContentTemplate="{DataTemplate auth:RegisterLoginPage}" />
-    </FlyoutItem>
-
-    <FlyoutItem Title="Chores" Icon="icon_chores.png">
-        <ShellContent ContentTemplate="{DataTemplate chores:ViewChoresPage}" />
-    </FlyoutItem>
-
-    <FlyoutItem Title="Family Members" Icon="icon_family.png">
-        <ShellContent ContentTemplate="{DataTemplate family:ViewFamilyMembersPage}" />
     </FlyoutItem>
 
 

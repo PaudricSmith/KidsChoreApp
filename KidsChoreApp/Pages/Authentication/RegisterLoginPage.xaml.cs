@@ -1,19 +1,87 @@
 using KidsChoreApp.Services;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
 
 namespace KidsChoreApp.Pages.Authentication
 {
-    public partial class RegisterLoginPage : ContentPage
+    public partial class RegisterLoginPage : ContentPage, INotifyPropertyChanged
     {
         private readonly AuthenticationService _authService;
-        private bool _isRegistering = false;
+        private bool _isRegistering;
+        private bool _isPasswordVisible;
+        private string _email;
+        private string _password;
+        private string _confirmPassword;
 
+        public bool IsRegistering
+        {
+            get => _isRegistering;
+            set
+            {
+                _isRegistering = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(MainActionText));
+                OnPropertyChanged(nameof(ToggleLinkText));
+                ConfirmPasswordEntry.IsVisible = _isRegistering;
+            }
+        }
+
+        public bool IsPasswordVisible
+        {
+            get => _isPasswordVisible;
+            set
+            {
+                _isPasswordVisible = value;
+                OnPropertyChanged();
+                PasswordEntry.IsPassword = !_isPasswordVisible;
+                ConfirmPasswordEntry.IsPassword = !_isPasswordVisible;
+            }
+        }
+
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                _email = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Password
+        {
+            get => _password;
+            set
+            {
+                _password = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string ConfirmPassword
+        {
+            get => _confirmPassword;
+            set
+            {
+                _confirmPassword = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string MainActionText => IsRegistering ? "Register" : "Login";
+        public string ToggleLinkText => IsRegistering ? "or Login" : "or Create a new account";
 
         public RegisterLoginPage(AuthenticationService authService)
         {
             InitializeComponent();
             _authService = authService;
+
+            BindingContext = this;
+
+            IsRegistering = false;
+            IsPasswordVisible = false; // Initialize password visibility correctly
 
             ToggleLink.GestureRecognizers.Add(new TapGestureRecognizer
             {
@@ -24,17 +92,12 @@ namespace KidsChoreApp.Pages.Authentication
             {
                 Command = new Command(OnHowToUseClicked)
             });
-
-            ConfirmPasswordEntry.IsVisible = _isRegistering;
         }
 
 
         private void ToggleRegisterLogin()
         {
-            _isRegistering = !_isRegistering;
-            ConfirmPasswordEntry.IsVisible = _isRegistering;
-            MainActionButton.Text = _isRegistering ? "Register" : "Login";
-            ToggleLink.Text = _isRegistering ? "or Login" : "or Create a new account";
+            IsRegistering = !IsRegistering;
         }
 
         private void OnHowToUseClicked()
@@ -47,18 +110,21 @@ namespace KidsChoreApp.Pages.Authentication
 
         private async void OnMainActionButtonClicked(object sender, EventArgs e)
         {
-            var email = EmailEntry.Text;
-            var password = PasswordEntry.Text;
-            string? confirmPassword = _isRegistering ? ConfirmPasswordEntry.Text : null;
+            // TESTING PURPOSES ONLY!!!!! ////////////////////////////////////////////////////////////////////
+                                Email = "testemail@email.com";
+                                Password = "Password1!";
+            //////////////////////////////////////////////////////////////////////////////////////////////////
 
-            if (!ValidateInputs(email, password, confirmPassword))
+
+            if (!ValidateInputs(Email, Password, ConfirmPassword))
             {
                 return;
             }
 
-            if (_isRegistering)
+            if (IsRegistering)
             {
-                var success = await _authService.RegisterAsync(email, password);
+                // Register Logic here
+                var success = await _authService.RegisterAsync(Email, Password);
                 if (success)
                 {
                     await DisplayAlert("Success", "Registration successful", "OK");
@@ -72,7 +138,8 @@ namespace KidsChoreApp.Pages.Authentication
             }
             else
             {
-                var success = await _authService.LoginAsync(email, password);
+                // Login Logic here
+                var success = await _authService.LoginAsync(Email, Password);
                 if (success)
                 {
                     Application.Current.MainPage = new AppShell();
@@ -86,10 +153,9 @@ namespace KidsChoreApp.Pages.Authentication
             await Navigation.PushAsync(new HomePage());
         }
 
-        private bool ValidateInputs(string email, string password, string? confirmPassword = null)
+        private bool ValidateInputs(string email, string password, string confirmPassword = null)
         {
             EmailErrorLabel.IsVisible = false;
-            PasswordErrorLabel.IsVisible = false;
             ConfirmPasswordErrorLabel.IsVisible = false;
 
             bool isValid = true;
@@ -104,7 +170,7 @@ namespace KidsChoreApp.Pages.Authentication
                 isValid = false;
             }
 
-            if (_isRegistering && password != confirmPassword)
+            if (IsRegistering && password != confirmPassword)
             {
                 ConfirmPasswordErrorLabel.Text = "Passwords do not match.";
                 ConfirmPasswordErrorLabel.IsVisible = true;
@@ -129,9 +195,8 @@ namespace KidsChoreApp.Pages.Authentication
         {
             if (string.IsNullOrWhiteSpace(password) || !IsValidPassword(password))
             {
-                PasswordErrorLabel.Text = "Password must be at least 8 characters long and " +
-                    "include at least one capital letter, one number and one special character.";
-                PasswordErrorLabel.IsVisible = true;
+                DisplayAlert("Error", "Password must be at least 8 characters long and include at least one capital letter, one number and one special character.", "OK");
+
                 return false;
             }
             return true;
@@ -151,8 +216,14 @@ namespace KidsChoreApp.Pages.Authentication
 
         private void OnPasswordEyeToggleClicked(object sender, EventArgs e)
         {
-            PasswordEntry.IsPassword = !PasswordEntry.IsPassword;
-            ConfirmPasswordEntry.IsPassword = !ConfirmPasswordEntry.IsPassword;
+            IsPasswordVisible = !IsPasswordVisible;
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

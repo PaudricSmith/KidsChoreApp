@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KidsChoreApp.Pages.Chores.AssignChoresPage">
+    
+    <StackLayout Padding="20">
+        <ListView x:Name="ChoresListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding Image}" WidthRequest="40" HeightRequest="40" />
+                                <Label Text="{Binding Name}" VerticalOptions="Center" />
+                            </StackLayout>
+                            <StackLayout x:Name="Details" IsVisible="False">
+                                <Label Text="{Binding Description}" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Assign to: " />
+                                    <Picker ItemsSource="{Binding Children}" ItemDisplayBinding="{Binding Name}" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Button Text="Edit" Clicked="OnEditClicked" />
+                                    <Button Text="Delete" Clicked="OnDeleteClicked" TextColor="Red" />
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Add Chore" Clicked="OnAddChoreClicked" />
+    </StackLayout>
+</ContentPage>

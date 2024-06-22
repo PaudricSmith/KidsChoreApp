@@ -34,7 +34,7 @@ namespace KidsChoreApp.Pages.Family
             var member = new FamilyMember
             {
                 Name = FamilyMemberNameEntry.Text,
-                Role = RolePicker.SelectedItem.ToString()
+                //Role = RolePicker.SelectedItem.ToString()
             };
 
             await _familyMemberDatabase.SaveFamilyMemberAsync(member);

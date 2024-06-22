@@ -23,9 +23,9 @@ namespace KidsChoreApp.Pages.Chores
         private async void LoadFamilyMembers()
         {
             var members = await _familyMemberDatabase.GetFamilyMembersAsync();
-            var children = members.Where(m => m.Role == "Child").Select(m => m.Name).ToList();
+            //var children = members.Where(m => m.Role == "Child").Select(m => m.Name).ToList();
 
-            AssignedToPicker.ItemsSource = children;
+            //AssignedToPicker.ItemsSource = children;
         }
 
         private async void OnSaveClicked(object sender, EventArgs e)

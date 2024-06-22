@@ -6,10 +6,10 @@
     <ContentPage.Resources>
         <Style TargetType="ImageButton">
             <Style.Triggers>
-                <DataTrigger TargetType="ImageButton" Binding="{Binding Source={x:Reference PasswordEntry}, Path=IsPassword}" Value="False">
+                <DataTrigger TargetType="ImageButton" Binding="{Binding IsPasswordVisible}" Value="true">
                     <Setter Property="Source" Value="{StaticResource EyeOpenIcon}" />
                 </DataTrigger>
-                <DataTrigger TargetType="ImageButton" Binding="{Binding Source={x:Reference PasswordEntry}, Path=IsPassword}" Value="True">
+                <DataTrigger TargetType="ImageButton" Binding="{Binding IsPasswordVisible}" Value="false">
                     <Setter Property="Source" Value="{StaticResource EyeClosedIcon}" />
                 </DataTrigger>
             </Style.Triggers>
@@ -35,29 +35,28 @@
 
         <!-- Email Entry and Error Label -->
         <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="Center">
-            <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" WidthRequest="300" />
+            <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" WidthRequest="300" Text="{Binding Email}" />
             <Label x:Name="EmailErrorLabel" TextColor="Red" IsVisible="False" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="Center" />
         </Grid>
 
         <!-- Password Entry with Toggle Button -->
-        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" WidthRequest="300" HorizontalOptions="FillAndExpand" />
-        <ImageButton x:Name="PasswordToggle" Clicked="OnPasswordEyeToggleClicked" Grid.Row="1" Grid.Column="4" VerticalOptions="Center" />
-        <Label x:Name="PasswordErrorLabel" TextColor="Red" IsVisible="False" Grid.Row="1" Grid.ColumnSpan="1" HorizontalOptions="Center" />
+        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="{Binding IsPasswordVisible}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" WidthRequest="300" Text="{Binding Password}" HorizontalOptions="FillAndExpand" />
+        <ImageButton x:Name="PasswordToggle" Clicked="OnPasswordEyeToggleClicked" Grid.Row="1" Grid.Column="4" />
 
         <!-- Confirm Password Entry and Error Label -->
         <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="Center">
-            <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm Password" IsPassword="True" WidthRequest="300" />
+            <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm Password" IsPassword="True" WidthRequest="300" Text="{Binding ConfirmPassword}" IsVisible="{Binding IsRegistering}" />
             <Label x:Name="ConfirmPasswordErrorLabel" TextColor="Red" IsVisible="False" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="Center" />
         </Grid>
 
         <!-- Main Action Button -->
         <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="Center">
-            <Button x:Name="MainActionButton" Text="Login" Clicked="OnMainActionButtonClicked" WidthRequest="300" />
+            <Button x:Name="MainActionButton" Text="{Binding MainActionText}" Clicked="OnMainActionButtonClicked" WidthRequest="300" />
         </Grid>
 
         <!-- Toggle Link and App Tip -->
         <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="Center">
-            <Label x:Name="ToggleLink" Text="or Create a new account" TextColor="Blue" HorizontalOptions="Center" />
+            <Label x:Name="ToggleLink" Text="{Binding ToggleLinkText}" TextColor="Blue" HorizontalOptions="Center" />
         </Grid>
         <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="End">
             <Label x:Name="AppTip" Text="How to use app with whole family" TextColor="Blue" HorizontalOptions="Center" />

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KidsChoreApp.Pages.Family.ChildPage">
+
+    <StackLayout Padding="20">
+        <ImageButton x:Name="ChildImage" Source="{Binding Image}" Clicked="OnChangeImageClicked" />
+        <Label Text="{Binding Name}" FontSize="24" HorizontalOptions="Center" />
+        <Label Text="Lifetime Earnings" FontSize="18" />
+        <Label Text="{Binding LifetimeEarnings}" FontSize="18" />
+        <Label Text="Weekly Earnings" FontSize="18" />
+        <Label Text="{Binding WeeklyEarnings}" FontSize="18" />
+        <ListView x:Name="ChoresListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="{Binding Image}" WidthRequest="40" HeightRequest="40" />
+                            <Label Text="{Binding Name}" VerticalOptions="Center" />
+                            <Label Text="{Binding Worth, StringFormat='€{0:F2}'}" VerticalOptions="Center" />
+                            <CheckBox IsChecked="{Binding IsComplete}" CheckedChanged="OnChoreCheckedChanged" VerticalOptions="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
