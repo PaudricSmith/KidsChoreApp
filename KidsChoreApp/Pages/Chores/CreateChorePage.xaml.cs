@@ -7,25 +7,24 @@ namespace KidsChoreApp.Pages.Chores
     public partial class CreateChorePage : ContentPage
     {
         private readonly ChoreDatabase _choreDatabase;
-        private readonly FamilyMemberDatabase _familyMemberDatabase;
+        private readonly ChildService _childService;
 
 
-        public CreateChorePage(ChoreDatabase choreDatabase, FamilyMemberDatabase familyMemberDatabase)
+        public CreateChorePage(ChoreDatabase choreDatabase, ChildService childService)
         {
             InitializeComponent();
 
             _choreDatabase = choreDatabase;
-            _familyMemberDatabase = familyMemberDatabase;
+            _childService = childService;
 
             LoadFamilyMembers();
         }
 
         private async void LoadFamilyMembers()
         {
-            var members = await _familyMemberDatabase.GetFamilyMembersAsync();
-            //var children = members.Where(m => m.Role == "Child").Select(m => m.Name).ToList();
+            var children = await _childService.GetAllChildrenAsync();
 
-            //AssignedToPicker.ItemsSource = children;
+            AssignedToPicker.ItemsSource = children;
         }
 
         private async void OnSaveClicked(object sender, EventArgs e)

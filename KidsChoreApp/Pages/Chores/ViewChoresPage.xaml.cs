@@ -7,10 +7,10 @@ namespace KidsChoreApp.Pages.Chores
     public partial class ViewChoresPage : ContentPage
     {
         private readonly ChoreDatabase _choreDatabase;
-        private readonly FamilyMemberDatabase _familyMemberDatabase;
+        private readonly ChildService _familyMemberDatabase;
 
 
-        public ViewChoresPage(ChoreDatabase choreDatabase, FamilyMemberDatabase familyMemberDatabase)
+        public ViewChoresPage(ChoreDatabase choreDatabase, ChildService familyMemberDatabase)
         {
             InitializeComponent();
 

@@ -3,11 +3,11 @@
 
 namespace KidsChoreApp.Models
 {
-    public class User
+    public class Parent
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string Email { get; set; }
-        public string PasswordHash { get; set; }
+        public int UserId { get; set; } // Foreign key to User
+        public string Passcode { get; set; }
     }
 }

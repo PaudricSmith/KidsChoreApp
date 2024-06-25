@@ -6,20 +6,10 @@
        xmlns:chores="clr-namespace:KidsChoreApp.Pages.Chores"
        xmlns:family="clr-namespace:KidsChoreApp.Pages.Family"
        xmlns:debugging="clr-namespace:KidsChoreApp.Pages.Debugging"
-       x:Class="KidsChoreApp.AppShell">
-    
-    <FlyoutItem Title="Home" Icon="icon_home.png">
-        <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
-    </FlyoutItem>
+       x:Class="KidsChoreApp.AppShell"
+       FlyoutBehavior="Disabled"
+       Title="KidsChoreApp">
 
-    <FlyoutItem Title="Register/Login" Icon="icon_login.png">
-        <ShellContent ContentTemplate="{DataTemplate auth:RegisterLoginPage}" />
-    </FlyoutItem>
-
-
-    <!-- Development debug option -->
-    <ShellItem Title="Debug Page" Route="debug" IsVisible="False">
-        <ShellContent Title="Debug" ContentTemplate="{DataTemplate debugging:DebugPage}" />
-    </ShellItem>
+    <ShellContent Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}" />
 
 </Shell>

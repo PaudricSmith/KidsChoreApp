@@ -1,18 +1,22 @@
 using KidsChoreApp.Models;
+using KidsChoreApp.Pages.Debugging;
 using KidsChoreApp.Pages.Family;
+using KidsChoreApp.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 
 namespace KidsChoreApp.Pages
 {
     public partial class HomePage : ContentPage, INotifyPropertyChanged
     {
+        private readonly ParentService _parentService;
+        private readonly ChildService _childService;
+        private Parent _parent;
         private bool _isPadlockUnlocked = false;
-        private string _parentalPasscode = "1234"; // Example passcode, should be securely stored and retrieved
 
-
-        public ObservableCollection<FamilyMember> Children { get; set; }
+        public ObservableCollection<Child> Children { get; set; }
         public bool IsPadlockUnlocked
         {
             get => _isPadlockUnlocked;
@@ -23,23 +27,38 @@ namespace KidsChoreApp.Pages
             }
         }
 
-        public HomePage()
+
+        public HomePage(ParentService parentService, ChildService childService)
         {
             InitializeComponent();
-            LoadChildren();
+            _parentService = parentService;
+            _childService = childService;
+
+            Children = new ObservableCollection<Child>();
 
             BindingContext = this;
         }
 
 
-        private void LoadChildren()
+        protected override async void OnAppearing()
         {
-            // Load children from database
-            Children = new ObservableCollection<FamilyMember>
+            base.OnAppearing();
+            await LoadData();
+        }
+
+        private async Task LoadData()
+        {
+            // Assuming you have a way to get the current user ID
+            int currentUserId = 1; // Replace with actual user ID retrieval logic
+            _parent = await _parentService.GetParentByUserIdAsync(currentUserId);
+
+            var children = await _childService.GetAllChildrenAsync();
+
+            Children.Clear();
+            foreach (var child in children)
             {
-                new FamilyMember { Name = "Kimberly", Image = "child1.png", Money = 10 },
-                new FamilyMember { Name = "Edward", Image = "child2.png", Money = 15 }
-            };
+                Children.Add(child);
+            }
         }
 
         private async void OnPadlockToggleClicked(object sender, EventArgs e)
@@ -51,7 +70,7 @@ namespace KidsChoreApp.Pages
             else
             {
                 string result = await DisplayPromptAsync("Enter your Parental Passcode", "", maxLength: 4, keyboard: Keyboard.Numeric);
-                if (result == _parentalPasscode)
+                if (result == _parent?.Passcode)
                 {
                     IsPadlockUnlocked = true;
                 }
@@ -64,7 +83,8 @@ namespace KidsChoreApp.Pages
 
         private async void OnAddChildClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AddChildPage());
+            //await Navigation.PushAsync(new AddChildPage(_childService));
+            await Shell.Current.GoToAsync(nameof(AddChildPage));
         }
 
         private async void OnAssignChoresClicked(object sender, EventArgs e)
@@ -91,7 +111,7 @@ namespace KidsChoreApp.Pages
 
         private async void OnChildSelected(object sender, SelectionChangedEventArgs e)
         {
-            var selectedChild = e.CurrentSelection[0] as FamilyMember;
+            var selectedChild = e.CurrentSelection[0] as Child;
             if (selectedChild != null)
             {
                 if (IsPadlockUnlocked)
@@ -101,7 +121,7 @@ namespace KidsChoreApp.Pages
                 else
                 {
                     string result = await DisplayPromptAsync($"Enter {selectedChild.Name}'s Passcode", "", maxLength: 4, keyboard: Keyboard.Numeric);
-                    if (result == selectedChild.Passcode) // Assuming each FamilyMember has a Passcode property
+                    if (result == selectedChild.Passcode)
                     {
                         //await Navigation.PushAsync(new ChildPage(selectedChild));
                     }
@@ -111,6 +131,18 @@ namespace KidsChoreApp.Pages
                     }
                 }
             }
+        }
+
+        private async void OnDebugClicked(object sender, EventArgs e)
+        {
+            //await Navigation.PushAsync(new DebugPage());
+            await Shell.Current.GoToAsync(nameof(DebugPage));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

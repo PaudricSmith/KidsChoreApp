@@ -5,18 +5,15 @@ namespace KidsChoreApp
 {
     public partial class App : Application
     {
-        public static IServiceProvider ServiceProvider { get; set; }
-
+        
         public App(IServiceProvider serviceProvider)
         {
             InitializeComponent();
 
             //MainPage = new AppShell();
 
-
             // Uncomment this to show the Register/Login screen first *******************************
-            ServiceProvider = serviceProvider;
-            MainPage = new NavigationPage(ServiceProvider.GetService<RegisterLoginPage>());
+            MainPage = new NavigationPage(MauiProgram.ServiceProvider.GetService<RegisterLoginPage>());
         }
     }
 }

@@ -6,38 +6,38 @@ namespace KidsChoreApp.Pages.Family
 {
     public partial class ViewFamilyMembersPage : ContentPage
     {
-        private readonly FamilyMemberDatabase _familyMemberDatabase;
+        private readonly ChildService _childService;
 
 
-        public ViewFamilyMembersPage(FamilyMemberDatabase familyMemberDatabase)
+        public ViewFamilyMembersPage(ChildService childService)
         {
             InitializeComponent();
-            _familyMemberDatabase = familyMemberDatabase;
+            _childService = childService;
             LoadFamilyMembers();
         }
 
 
         private async void LoadFamilyMembers()
         {
-            var members = await _familyMemberDatabase.GetFamilyMembersAsync();
-            FamilyMembersListView.ItemsSource = members;
+            var children = await _childService.GetAllChildrenAsync();
+            FamilyMembersListView.ItemsSource = children;
         }
 
         private async void OnFamilyMemberTapped(object sender, ItemTappedEventArgs e)
         {
-            var member = (FamilyMember)e.Item;
+            var child = (Child)e.Item;
 
-            bool deleteMember = await DisplayAlert("Delete Family Member", "Do you want to delete this family member?", "Yes", "No");
+            bool deleteMember = await DisplayAlert("Delete child", "Do you want to delete this child?", "Yes", "No");
             if (deleteMember)
             {
-                await _familyMemberDatabase.DeleteFamilyMemberAsync(member);
+                await _childService.DeleteChildAsync(child);
                 LoadFamilyMembers();
             }
         }
 
         private async void OnAddFamilyMemberClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CreateFamilyMemberPage(_familyMemberDatabase));
+            await Navigation.PushAsync(new CreateFamilyMemberPage(_childService));
         }
 
         protected override async void OnAppearing()

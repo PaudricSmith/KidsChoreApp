@@ -1,4 +1,6 @@
+using KidsChoreApp.Models;
 using KidsChoreApp.Services;
+using SQLite;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
@@ -8,12 +10,15 @@ namespace KidsChoreApp.Pages.Authentication
 {
     public partial class RegisterLoginPage : ContentPage, INotifyPropertyChanged
     {
-        private readonly AuthenticationService _authService;
+        private readonly UserService _userService;
+        private readonly ParentService _parentService;
+        private readonly ChildService _childService;
         private bool _isRegistering;
         private bool _isPasswordVisible;
         private string _email;
         private string _password;
         private string _confirmPassword;
+
 
         public bool IsRegistering
         {
@@ -73,15 +78,18 @@ namespace KidsChoreApp.Pages.Authentication
         public string MainActionText => IsRegistering ? "Register" : "Login";
         public string ToggleLinkText => IsRegistering ? "or Login" : "or Create a new account";
 
-        public RegisterLoginPage(AuthenticationService authService)
+
+        public RegisterLoginPage(UserService userService, ParentService parentService, ChildService childService)
         {
             InitializeComponent();
-            _authService = authService;
+            _userService = userService;
+            _parentService = parentService;
+            _childService = childService;
 
             BindingContext = this;
 
             IsRegistering = false;
-            IsPasswordVisible = false; // Initialize password visibility correctly
+            IsPasswordVisible = false; 
 
             ToggleLink.GestureRecognizers.Add(new TapGestureRecognizer
             {
@@ -124,11 +132,24 @@ namespace KidsChoreApp.Pages.Authentication
             if (IsRegistering)
             {
                 // Register Logic here
-                var success = await _authService.RegisterAsync(Email, Password);
+                var success = await _userService.RegisterAsync(Email, Password);
                 if (success)
                 {
+                    // Get the newly created user
+                    var user = await _userService.GetUserByEmailAsync(Email);
+
+                    // Create a new parent account
+                    var parentAccount = new Parent
+                    {
+                        UserId = user.Id,
+                        Passcode = "1234" // Store the password securely in a real application
+                    };
+
+                    await _parentService.SaveParentAsync(parentAccount);
+
+
                     await DisplayAlert("Success", "Registration successful", "OK");
-                    await Navigation.PopAsync();
+                    await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
                 }
                 else
                 {
@@ -139,18 +160,19 @@ namespace KidsChoreApp.Pages.Authentication
             else
             {
                 // Login Logic here
-                var success = await _authService.LoginAsync(Email, Password);
+                var success = await _userService.LoginAsync(Email, Password);
                 if (success)
                 {
                     Application.Current.MainPage = new AppShell();
+
+                    await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
                 }
                 else
                 {
                     await DisplayAlert("Error", "Invalid login. Please check your email and Password.", "OK");
+                    return;
                 }
             }
-
-            await Navigation.PushAsync(new HomePage());
         }
 
         private bool ValidateInputs(string email, string password, string confirmPassword = null)

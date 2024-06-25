@@ -1,4 +1,9 @@
-﻿namespace KidsChoreApp
+﻿using KidsChoreApp.Pages;
+using KidsChoreApp.Pages.Debugging;
+using KidsChoreApp.Pages.Family;
+
+
+namespace KidsChoreApp
 {
     public partial class AppShell : Shell
     {
@@ -6,16 +11,9 @@
         {
             InitializeComponent();
 
-
-
-            // Debug option visibility toggle (for testing)
-#if DEBUG
-            var debugItem = Items.FirstOrDefault(item => item.Route == "debug");
-            if (debugItem != null)
-            {
-                debugItem.IsVisible = true;
-            }
-#endif
+            Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
+            Routing.RegisterRoute(nameof(AddChildPage), typeof(AddChildPage));
+            Routing.RegisterRoute(nameof(DebugPage), typeof(DebugPage));
         }
     }
 }

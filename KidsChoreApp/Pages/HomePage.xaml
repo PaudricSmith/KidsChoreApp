@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KidsChoreApp.Pages.HomePage">
-    
+
     <ContentPage.Resources>
         <Style TargetType="ImageButton">
             <Style.Triggers>
@@ -15,12 +15,13 @@
             </Style.Triggers>
         </Style>
     </ContentPage.Resources>
-    
+
     <Grid Padding="20" RowSpacing="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -32,8 +33,6 @@
         <Image Source="dotnet_bot" Grid.Row="0" Grid.ColumnSpan="2" HorizontalOptions="Center" />
 
         <ImageButton x:Name="PadlockToggle" Clicked="OnPadlockToggleClicked" Grid.Row="1" Grid.Column="1" />
-        <!--<ImageButton x:Name="PasswordToggle" Clicked="OnPasswordEyeToggleClicked" Grid.Row="1" Grid.Column="4" />-->
-
 
         <CollectionView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding Children}" SelectionMode="Single" SelectionChanged="OnChildSelected">
             <CollectionView.ItemsLayout>
@@ -60,6 +59,10 @@
         <StackLayout Grid.Row="4" Grid.ColumnSpan="2" IsVisible="{Binding IsPadlockUnlocked}" Spacing="10" Orientation="Horizontal" HorizontalOptions="Center">
             <Button Text="Settings" Clicked="OnSettingsClicked" />
             <Button Text="Feedback" Clicked="OnFeedbackClicked" />
+        </StackLayout>
+
+        <StackLayout Grid.Row="5" Grid.ColumnSpan="2" Spacing="10" Orientation="Horizontal" HorizontalOptions="Center">
+            <Button Text="Debug" Clicked="OnDebugClicked" />
         </StackLayout>
     </Grid>
 </ContentPage>

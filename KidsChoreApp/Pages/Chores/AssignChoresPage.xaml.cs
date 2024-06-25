@@ -8,16 +8,17 @@ namespace KidsChoreApp.Pages.Chores
     public partial class AssignChoresPage : ContentPage
     {
         private readonly ChoreDatabase _choreDatabase;
-        private readonly FamilyMemberDatabase _familyMemberDatabase;
+        private readonly ChildService _childService;
 
         public ObservableCollection<Chore> Chores { get; set; }
-        public ObservableCollection<FamilyMember> Children { get; set; }
+        public ObservableCollection<Child> Children { get; set; }
 
-        public AssignChoresPage(ChoreDatabase choreDatabase, FamilyMemberDatabase familyMemberDatabase)
+        public AssignChoresPage(ChoreDatabase choreDatabase, ChildService childService)
         {
             InitializeComponent();
             _choreDatabase = choreDatabase;
-            _familyMemberDatabase = familyMemberDatabase;
+            _childService = childService;
+
             LoadChores();
             LoadChildren();
         }
@@ -32,13 +33,13 @@ namespace KidsChoreApp.Pages.Chores
 
         private async void LoadChildren()
         {
-            var children = await _familyMemberDatabase.GetFamilyMembersAsync();
+            var children = await _childService.GetAllChildrenAsync();
             //Children = new ObservableCollection<FamilyMember>(children.Where(c => c.Role == "Child"));
         }
 
         private async void OnAddChoreClicked(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new AddChorePage(_choreDatabase, _familyMemberDatabase));
+            //await Navigation.PushAsync(new AddChorePage(_choreDatabase, _childService));
         }
 
         private async void OnEditClicked(object sender, EventArgs e)

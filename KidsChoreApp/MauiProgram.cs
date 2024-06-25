@@ -5,12 +5,15 @@ using KidsChoreApp.Services;
 using Microsoft.Extensions.Logging;
 using SQLite;
 using MauiIcons.Fluent;
+using KidsChoreApp.Pages;
 
 
 namespace KidsChoreApp
 {
     public static class MauiProgram
     {
+        public static IServiceProvider ServiceProvider { get; private set; }
+
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -39,11 +42,14 @@ namespace KidsChoreApp
             builder.Services.AddSingleton<SQLiteAsyncConnection>(s => new SQLiteAsyncConnection(dbPath));
 
             // Register Services
-            builder.Services.AddSingleton<AuthenticationService>();
+            builder.Services.AddSingleton<UserService>();
+            builder.Services.AddSingleton<ParentService>();
+            builder.Services.AddSingleton<ChildService>();
             builder.Services.AddSingleton<ChoreDatabase>();
-            builder.Services.AddSingleton<FamilyMemberDatabase>();
 
             // Register pages
+            builder.Services.AddTransient<HomePage>();
+            builder.Services.AddTransient<AddChildPage>();
             builder.Services.AddTransient<RegisterLoginPage>();
             builder.Services.AddTransient<CreateChorePage>();
             builder.Services.AddTransient<ViewChoresPage>();
@@ -51,10 +57,9 @@ namespace KidsChoreApp
             builder.Services.AddTransient<CreateFamilyMemberPage>();
             builder.Services.AddTransient<ViewFamilyMembersPage>();
 
-
             var mauiApp = builder.Build();
 
-            App.ServiceProvider = mauiApp.Services;
+            ServiceProvider = mauiApp.Services;
 
             return mauiApp;
         }

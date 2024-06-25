@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KidsChoreApp.Pages.Family.AddChildPage">
-    
+
     <StackLayout Padding="20">
-        <Entry x:Name="ChildNameEntry" Placeholder="Child Name" />
+        <Entry x:Name="ChildNameEntry" Placeholder="Child's Name" />
         <ImageButton x:Name="ChildImageButton" Source="default_child.png" Clicked="OnChildImageClicked" />
         <Entry x:Name="WeeklyAllowanceEntry" Placeholder="Weekly Allowance" Keyboard="Numeric" />
-        <Entry x:Name="ChildPasscodeEntry" Placeholder="Child Passcode" IsPassword="True" />
+        <Entry x:Name="ChildPasscodeEntry" Placeholder="Child's Passcode" IsPassword="True" />
         <Entry x:Name="ConfirmChildPasscodeEntry" Placeholder="Confirm Child Passcode" IsPassword="True" />
         <Button Text="Save" Clicked="OnSaveClicked" />
     </StackLayout>
