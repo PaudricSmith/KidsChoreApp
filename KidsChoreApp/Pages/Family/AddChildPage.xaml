@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:KidsChoreApp.Views"
              x:Class="KidsChoreApp.Pages.Family.AddChildPage">
 
     <StackLayout Padding="20">
-        <Entry x:Name="ChildNameEntry" Placeholder="Child's Name" />
-        <ImageButton x:Name="ChildImageButton" Source="default_child.png" Clicked="OnChildImageClicked" />
-        <Entry x:Name="WeeklyAllowanceEntry" Placeholder="Weekly Allowance" Keyboard="Numeric" />
-        <Entry x:Name="ChildPasscodeEntry" Placeholder="Child's Passcode" IsPassword="True" />
-        <Entry x:Name="ConfirmChildPasscodeEntry" Placeholder="Confirm Child Passcode" IsPassword="True" />
+        <Entry x:Name="ChildNameEntry" Placeholder="Child's Name" Focused="OnOtherEntryFocused" />
+        <ImageButton x:Name="ChildImageButton" Source="default_child.png" Clicked="OnChildImageClicked" BackgroundColor="BlanchedAlmond" />
+        <Entry x:Name="WeeklyAllowanceEntry" Placeholder="Weekly Allowance" Focused="OnOtherEntryFocused" Keyboard="Numeric" />
+
+        <Label Text="Enter Passcode" />
+        <Grid ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Entry x:Name="Digit1" MaxLength="1" IsReadOnly="True" Grid.Column="0" />
+            <Entry x:Name="Digit2" MaxLength="1" IsReadOnly="True" Grid.Column="1" />
+            <Entry x:Name="Digit3" MaxLength="1" IsReadOnly="True" Grid.Column="2" />
+            <Entry x:Name="Digit4" MaxLength="1" IsReadOnly="True" Grid.Column="3" />
+        </Grid>
+
+        <views:KeypadView x:Name="KeypadViewComponent" KeypadNumClicked="OnKeypadNumClicked" BackspaceClicked="OnBackspaceClicked" IsVisible="False" />
+
         <Button Text="Save" Clicked="OnSaveClicked" />
     </StackLayout>
+
 </ContentPage>

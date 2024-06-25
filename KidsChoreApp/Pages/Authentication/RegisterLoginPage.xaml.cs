@@ -147,7 +147,6 @@ namespace KidsChoreApp.Pages.Authentication
 
                     await _parentService.SaveParentAsync(parentAccount);
 
-
                     await DisplayAlert("Success", "Registration successful", "OK");
                     await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
                 }

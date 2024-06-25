@@ -102,6 +102,9 @@
 	  <MauiXaml Update="Pages\Family\ViewFamilyMembersPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\KeypadView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionKidsChoreAppHideInfoBar="True" /></VisualStudio></ProjectExtensions>
