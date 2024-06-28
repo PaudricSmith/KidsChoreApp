@@ -12,8 +12,6 @@ namespace KidsChoreApp
 {
     public static class MauiProgram
     {
-        public static IServiceProvider ServiceProvider { get; private set; }
-
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -41,6 +39,11 @@ namespace KidsChoreApp
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "kidschoreapp.db3");
             builder.Services.AddSingleton<SQLiteAsyncConnection>(s => new SQLiteAsyncConnection(dbPath));
 
+            //if (File.Exists(dbPath))
+            //{
+            //    File.Delete(dbPath);
+            //}
+
             // Register Services
             builder.Services.AddSingleton<UserService>();
             builder.Services.AddSingleton<ParentService>();
@@ -58,8 +61,6 @@ namespace KidsChoreApp
             builder.Services.AddTransient<ViewFamilyMembersPage>();
 
             var mauiApp = builder.Build();
-
-            ServiceProvider = mauiApp.Services;
 
             return mauiApp;
         }

@@ -1,6 +1,5 @@
 using KidsChoreApp.Models;
 using KidsChoreApp.Services;
-using SQLite;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
@@ -148,7 +147,8 @@ namespace KidsChoreApp.Pages.Authentication
                     await _parentService.SaveParentAsync(parentAccount);
 
                     await DisplayAlert("Success", "Registration successful", "OK");
-                    await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+
+                    Application.Current.MainPage = new AppShell();
                 }
                 else
                 {

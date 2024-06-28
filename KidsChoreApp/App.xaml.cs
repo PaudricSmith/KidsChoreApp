@@ -10,10 +10,10 @@ namespace KidsChoreApp
         {
             InitializeComponent();
 
+            // Uncomment this to show the home page first *******************************
             //MainPage = new AppShell();
 
-            // Uncomment this to show the Register/Login screen first *******************************
-            MainPage = new NavigationPage(MauiProgram.ServiceProvider.GetService<RegisterLoginPage>());
+            MainPage = new NavigationPage(serviceProvider.GetService<RegisterLoginPage>());
         }
     }
 }
