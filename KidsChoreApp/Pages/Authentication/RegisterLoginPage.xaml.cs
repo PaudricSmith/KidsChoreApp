@@ -137,18 +137,11 @@ namespace KidsChoreApp.Pages.Authentication
                     // Get the newly created user
                     var user = await _userService.GetUserByEmailAsync(Email);
 
-                    // Create a new parent account
-                    var parentAccount = new Parent
-                    {
-                        UserId = user.Id,
-                        Passcode = "1234" // Store the password securely in a real application
-                    };
-
-                    await _parentService.SaveParentAsync(parentAccount);
-
                     await DisplayAlert("Success", "Registration successful", "OK");
 
                     Application.Current.MainPage = new AppShell();
+
+                    await Shell.Current.GoToAsync($"//{nameof(SetupPage)}");
                 }
                 else
                 {
@@ -163,8 +156,6 @@ namespace KidsChoreApp.Pages.Authentication
                 if (success)
                 {
                     Application.Current.MainPage = new AppShell();
-
-                    await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
                 }
                 else
                 {

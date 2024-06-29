@@ -39,10 +39,10 @@ namespace KidsChoreApp
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "kidschoreapp.db3");
             builder.Services.AddSingleton<SQLiteAsyncConnection>(s => new SQLiteAsyncConnection(dbPath));
 
-            //if (File.Exists(dbPath))
-            //{
-            //    File.Delete(dbPath);
-            //}
+            if (File.Exists(dbPath))
+            {
+                File.Delete(dbPath);
+            }
 
             // Register Services
             builder.Services.AddSingleton<UserService>();
@@ -51,9 +51,10 @@ namespace KidsChoreApp
             builder.Services.AddSingleton<ChoreDatabase>();
 
             // Register pages
+            builder.Services.AddTransient<RegisterLoginPage>();
+            builder.Services.AddTransient<SetupPage>();
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<AddChildPage>();
-            builder.Services.AddTransient<RegisterLoginPage>();
             builder.Services.AddTransient<CreateChorePage>();
             builder.Services.AddTransient<ViewChoresPage>();
             builder.Services.AddTransient<ChoreDetailsPage>();

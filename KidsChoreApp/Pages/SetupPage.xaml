@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:KidsChoreApp.Views"
+             x:Class="KidsChoreApp.Pages.SetupPage">
+
+    <StackLayout Padding="20">
+        <Label Text="Set Parental Passcode" FontSize="Large" HorizontalOptions="Center" />
+        <Label Text="Enter Passcode" />
+        <Grid ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Entry x:Name="Digit1" MaxLength="1" IsReadOnly="True" Grid.Column="0" />
+            <Entry x:Name="Digit2" MaxLength="1" IsReadOnly="True" Grid.Column="1" />
+            <Entry x:Name="Digit3" MaxLength="1" IsReadOnly="True" Grid.Column="2" />
+            <Entry x:Name="Digit4" MaxLength="1" IsReadOnly="True" Grid.Column="3" />
+        </Grid>
+
+        <views:KeypadView x:Name="KeypadViewComponent" KeypadNumClicked="OnKeypadNumClicked" BackspaceClicked="OnBackspaceClicked" />
+
+        <Button Text="Save Passcode" Clicked="OnSavePasscodeClicked" />
+    </StackLayout>
+</ContentPage>

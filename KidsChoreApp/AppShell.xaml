@@ -11,5 +11,7 @@
        Title="KidsChoreApp">
 
     <ShellContent Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}" />
+    
+    <ShellContent Route="SetupPage" ContentTemplate="{DataTemplate local:SetupPage}" />
 
 </Shell>

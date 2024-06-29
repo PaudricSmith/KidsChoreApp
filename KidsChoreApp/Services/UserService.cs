@@ -46,6 +46,11 @@ namespace KidsChoreApp.Services
             return await _database.Table<User>().Where(u => u.Email == email).FirstOrDefaultAsync();
         }
 
+        public async Task UpdateUserAsync(User user)
+        {
+            await _database.UpdateAsync(user);
+        }
+
         private string HashPassword(string password)
         {
             using var sha256 = SHA256.Create();
