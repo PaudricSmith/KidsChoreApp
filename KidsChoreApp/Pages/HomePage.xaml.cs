@@ -9,14 +9,28 @@ using System.Runtime.CompilerServices;
 
 namespace KidsChoreApp.Pages
 {
+    [QueryProperty(nameof(UserId), "userId")]
     public partial class HomePage : ContentPage, INotifyPropertyChanged
     {
         private readonly ParentService _parentService;
         private readonly ChildService _childService;
+
         private Parent _parent;
+        private int _userId;
         private bool _isPadlockUnlocked = false;
 
         public ObservableCollection<Child> Children { get; set; }
+
+        public int UserId
+        {
+            get => _userId;
+            set
+            {
+                _userId = value;
+                LoadData(); // Load data when UserId is set
+            }
+        }
+
         public bool IsPadlockUnlocked
         {
             get => _isPadlockUnlocked;
@@ -48,10 +62,15 @@ namespace KidsChoreApp.Pages
 
         private async Task LoadData()
         {
-            // Assuming you have a way to get the current user ID
-            int currentUserId = 1; // Replace with actual user ID retrieval logic
-            _parent = await _parentService.GetParentByUserIdAsync(currentUserId);
+            if (_userId == 0)
+            {
+                await DisplayAlert("Error", "No User account found!", "OK");
 
+                return;
+            }
+
+
+            _parent = await _parentService.GetParentByUserIdAsync(_userId);
             var children = await _childService.GetAllChildrenAsync();
 
             Children.Clear();
@@ -83,7 +102,6 @@ namespace KidsChoreApp.Pages
 
         private async void OnAddChildClicked(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new AddChildPage(_childService));
             await Shell.Current.GoToAsync(nameof(AddChildPage));
         }
 
@@ -135,7 +153,6 @@ namespace KidsChoreApp.Pages
 
         private async void OnDebugClicked(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new DebugPage());
             await Shell.Current.GoToAsync(nameof(DebugPage));
         }
 

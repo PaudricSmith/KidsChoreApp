@@ -147,8 +147,6 @@ namespace KidsChoreApp.Pages.Authentication
 
                     //await DisplayAlert("Success", "Registration successful", "OK");
                     Application.Current.MainPage = new AppShell();
-
-
                     await Shell.Current.GoToAsync($"//{nameof(SetupPage)}?userId={user.Id}");
 
                 }
@@ -171,6 +169,7 @@ namespace KidsChoreApp.Pages.Authentication
                     else
                     {
                         Application.Current.MainPage = new AppShell();
+                        await Shell.Current.GoToAsync($"//{nameof(HomePage)}?userId={user.Id}");
                     }
                 }
                 else
