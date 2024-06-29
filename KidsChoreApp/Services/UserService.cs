@@ -18,6 +18,22 @@ namespace KidsChoreApp.Services
         }
 
 
+        public Task<User> GetUserByIdAsync(int id)
+        {
+            return _database.Table<User>().FirstOrDefaultAsync(u => u.Id == id);
+        }
+
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            return await _database.Table<User>().Where(u => u.Email == email).FirstOrDefaultAsync();
+        }
+
+        public async Task UpdateUserAsync(User user)
+        {
+            await _database.UpdateAsync(user);
+        }
+
+
         public async Task<bool> RegisterAsync(string email, string password)
         {
             var user = await _database.Table<User>().Where(u => u.Email == email).FirstOrDefaultAsync();
@@ -26,7 +42,8 @@ namespace KidsChoreApp.Services
             var newUser = new User
             {
                 Email = email,
-                PasswordHash = HashPassword(password)
+                PasswordHash = HashPassword(password),
+                IsSetupCompleted = false
             };
 
             await _database.InsertAsync(newUser);
@@ -39,16 +56,6 @@ namespace KidsChoreApp.Services
             if (user == null) return false;
 
             return VerifyPassword(password, user.PasswordHash);
-        }
-
-        public async Task<User> GetUserByEmailAsync(string email)
-        {
-            return await _database.Table<User>().Where(u => u.Email == email).FirstOrDefaultAsync();
-        }
-
-        public async Task UpdateUserAsync(User user)
-        {
-            await _database.UpdateAsync(user);
         }
 
         private string HashPassword(string password)

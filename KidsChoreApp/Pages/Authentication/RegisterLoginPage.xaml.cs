@@ -130,18 +130,27 @@ namespace KidsChoreApp.Pages.Authentication
 
             if (IsRegistering)
             {
-                // Register Logic here
                 var success = await _userService.RegisterAsync(Email, Password);
                 if (success)
                 {
                     // Get the newly created user
                     var user = await _userService.GetUserByEmailAsync(Email);
 
-                    await DisplayAlert("Success", "Registration successful", "OK");
+                    // Create a new parent account
+                    var parentAccount = new Parent
+                    {
+                        UserId = user.Id
+                    };
 
+                    await _parentService.SaveParentAsync(parentAccount);
+
+
+                    //await DisplayAlert("Success", "Registration successful", "OK");
                     Application.Current.MainPage = new AppShell();
 
-                    await Shell.Current.GoToAsync($"//{nameof(SetupPage)}");
+
+                    await Shell.Current.GoToAsync($"//{nameof(SetupPage)}?userId={user.Id}");
+
                 }
                 else
                 {
@@ -149,13 +158,20 @@ namespace KidsChoreApp.Pages.Authentication
                     return;
                 }
             }
-            else
+            else // Logging In
             {
-                // Login Logic here
                 var success = await _userService.LoginAsync(Email, Password);
                 if (success)
                 {
-                    Application.Current.MainPage = new AppShell();
+                    var user = await _userService.GetUserByEmailAsync(Email);
+                    if (!user.IsSetupCompleted)
+                    {
+                        await Shell.Current.GoToAsync($"//{nameof(SetupPage)}?userId={user.Id}");
+                    }
+                    else
+                    {
+                        Application.Current.MainPage = new AppShell();
+                    }
                 }
                 else
                 {

@@ -4,19 +4,23 @@ using KidsChoreApp.Services;
 
 namespace KidsChoreApp.Pages
 {
+    [QueryProperty(nameof(UserId), "userId")]
     public partial class SetupPage : ContentPage
     {
         private readonly UserService _userService;
         private readonly ParentService _parentService;
-        //private readonly User _user;
+
+        private User _user;
         private List<Entry> _passcodeEntries;
 
+        public int UserId { get; set; }
+       
 
-        public SetupPage(ParentService parentService)
+        public SetupPage(UserService userService, ParentService parentService)
         {
             InitializeComponent();
+            _userService = userService;
             _parentService = parentService;
-            
             _passcodeEntries = new List<Entry> { Digit1, Digit2, Digit3, Digit4 };
 
             // Adding TapGestureRecognizers to ensure focus is properly managed
@@ -69,20 +73,29 @@ namespace KidsChoreApp.Pages
                 return;
             }
 
-            // Create a new parent account
-            var parentAccount = new Parent
+            // Retrieve the existing User record using the UserId that was passed from the RegisterLoginPage query
+            _user = await _userService.GetUserByIdAsync(UserId);
+
+            Console.WriteLine("User Id: " + _user.Id + "**************************************************************************");
+
+            // Retrieve the existing parent record using the UserId
+            var parent = await _parentService.GetParentByUserIdAsync(_user.Id);
+
+            if (parent == null)
             {
-                UserId = 1, //_user.Id,
-                Passcode = passcode
-            };
+                await DisplayAlert("Error", "Parent record not found.", "OK");
+                return;
+            }
 
-            await _parentService.SaveParentAsync(parentAccount);
+            // Update the parent's passcode
+            parent.Passcode = passcode;
+            await _parentService.UpdateParentAsync(parent);
 
-            // Mark setup as completed here
-            //_user.IsSetupCompleted = true;
+            // Update the user's setup completion status
+            _user.IsSetupCompleted = true;
+            await _userService.UpdateUserAsync(_user);
 
-            //await _userService.UpdateUserAsync(_user);
-
+            // Navigate to the home page
             Application.Current.MainPage = new AppShell(); // new AppShell will show the first shell content which is the 'HomePage'
         }
     }

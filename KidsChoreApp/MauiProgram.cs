@@ -39,10 +39,10 @@ namespace KidsChoreApp
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "kidschoreapp.db3");
             builder.Services.AddSingleton<SQLiteAsyncConnection>(s => new SQLiteAsyncConnection(dbPath));
 
-            if (File.Exists(dbPath))
-            {
-                File.Delete(dbPath);
-            }
+            //if (File.Exists(dbPath))
+            //{
+            //    File.Delete(dbPath);
+            //}
 
             // Register Services
             builder.Services.AddSingleton<UserService>();

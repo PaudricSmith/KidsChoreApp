@@ -10,5 +10,5 @@ namespace KidsChoreApp.Models
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public bool IsSetupCompleted { get; set; }
-    }
+    }    
 }

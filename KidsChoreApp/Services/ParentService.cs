@@ -32,6 +32,11 @@ namespace KidsChoreApp.Services
             }
         }
 
+        public async Task UpdateParentAsync(Parent parent)
+        {
+            await _database.UpdateAsync(parent);
+        }
+
         public Task<int> DeleteParentAsync(Parent parent)
         {
             return _database.DeleteAsync(parent);

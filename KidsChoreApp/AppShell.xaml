@@ -2,10 +2,6 @@
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:KidsChoreApp.Pages"
-       xmlns:auth="clr-namespace:KidsChoreApp.Pages.Authentication"
-       xmlns:chores="clr-namespace:KidsChoreApp.Pages.Chores"
-       xmlns:family="clr-namespace:KidsChoreApp.Pages.Family"
-       xmlns:debugging="clr-namespace:KidsChoreApp.Pages.Debugging"
        x:Class="KidsChoreApp.AppShell"
        FlyoutBehavior="Disabled"
        Title="KidsChoreApp">
