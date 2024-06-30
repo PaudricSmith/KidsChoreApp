@@ -118,7 +118,7 @@ namespace KidsChoreApp.Pages.Authentication
         private async void OnMainActionButtonClicked(object sender, EventArgs e)
         {
             // TESTING PURPOSES ONLY!!!!! ////////////////////////////////////////////////////////////////////
-                                Email = "testemail@email.com";
+                                Email = "testemail2@email.com";
                                 Password = "Password1!";
             //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -168,6 +168,8 @@ namespace KidsChoreApp.Pages.Authentication
                     }
                     else
                     {
+                        Console.WriteLine("User Id RegisterLoginPage Login else = " + user.Id + "********************************************************************");
+
                         Application.Current.MainPage = new AppShell();
                         await Shell.Current.GoToAsync($"//{nameof(HomePage)}?userId={user.Id}");
                     }

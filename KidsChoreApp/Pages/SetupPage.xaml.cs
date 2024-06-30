@@ -76,7 +76,7 @@ namespace KidsChoreApp.Pages
             // Retrieve the existing User record using the UserId that was passed from the RegisterLoginPage query
             _user = await _userService.GetUserByIdAsync(UserId);
 
-            Console.WriteLine("User Id: " + _user.Id + "**************************************************************************");
+            Console.WriteLine("User Id in SetupPage OnSavePasscodeClicked: " + _user.Id + "**************************************************************************");
 
             // Retrieve the existing parent record using the UserId
             var parent = await _parentService.GetParentByUserIdAsync(_user.Id);

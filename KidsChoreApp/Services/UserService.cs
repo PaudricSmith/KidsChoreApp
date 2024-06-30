@@ -33,7 +33,6 @@ namespace KidsChoreApp.Services
             await _database.UpdateAsync(user);
         }
 
-
         public async Task<bool> RegisterAsync(string email, string password)
         {
             var user = await _database.Table<User>().Where(u => u.Email == email).FirstOrDefaultAsync();

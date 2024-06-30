@@ -27,7 +27,6 @@ namespace KidsChoreApp.Pages
             set
             {
                 _userId = value;
-                LoadData(); // Load data when UserId is set
             }
         }
 
@@ -51,27 +50,24 @@ namespace KidsChoreApp.Pages
             Children = new ObservableCollection<Child>();
 
             BindingContext = this;
+
+            Console.WriteLine("User Id in HomePage ctor = " + UserId + "********************************************************************");
+
         }
 
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
             await LoadData();
+
+            Console.WriteLine("User Id in HomePage OnAppearing = " + UserId + "********************************************************************");
         }
 
         private async Task LoadData()
-        {
-            if (_userId == 0)
-            {
-                await DisplayAlert("Error", "No User account found!", "OK");
-
-                return;
-            }
-
-
-            _parent = await _parentService.GetParentByUserIdAsync(_userId);
-            var children = await _childService.GetAllChildrenAsync();
+        {          
+            var children = await _childService.GetAllChildrenByUserIdAsync(UserId);
 
             Children.Clear();
             foreach (var child in children)
@@ -88,6 +84,8 @@ namespace KidsChoreApp.Pages
             }
             else
             {
+                _parent = await _parentService.GetParentByUserIdAsync(UserId);
+
                 string result = await DisplayPromptAsync("Enter your Parental Passcode", "", maxLength: 4, keyboard: Keyboard.Numeric);
                 if (result == _parent?.Passcode)
                 {
@@ -102,7 +100,9 @@ namespace KidsChoreApp.Pages
 
         private async void OnAddChildClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync(nameof(AddChildPage));
+            Console.WriteLine("User Id in HomePage OnAddChildClicked = " + _userId + "********************************************************************");
+
+            await Shell.Current.GoToAsync($"{nameof(AddChildPage)}?userId={_userId}");
         }
 
         private async void OnAssignChoresClicked(object sender, EventArgs e)

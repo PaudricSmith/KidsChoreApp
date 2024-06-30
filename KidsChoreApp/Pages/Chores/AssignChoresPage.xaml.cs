@@ -33,7 +33,7 @@ namespace KidsChoreApp.Pages.Chores
 
         private async void LoadChildren()
         {
-            var children = await _childService.GetAllChildrenAsync();
+            //var children = await _childService.GetAllChildrenAsync();
             //Children = new ObservableCollection<FamilyMember>(children.Where(c => c.Role == "Child"));
         }
 

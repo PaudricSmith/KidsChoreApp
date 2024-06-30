@@ -4,18 +4,30 @@ using KidsChoreApp.Services;
 
 namespace KidsChoreApp.Pages.Family
 {
+    [QueryProperty(nameof(UserId), "userId")]
     public partial class AddChildPage : ContentPage
     {
         private readonly ChildService _childService;
         private string _selectedImage = "default_avatar.png"; // Default image
+        private int _userId;
 
         private List<Entry> _passcodeEntries;
+
+        public int UserId
+        {
+            get => _userId;
+            set
+            {
+                _userId = value;
+            }
+        }
 
 
         public AddChildPage(ChildService childService)
         {
             InitializeComponent();
             _childService = childService;
+
             _passcodeEntries = new List<Entry> { Digit1, Digit2, Digit3, Digit4 };
 
             // Adding TapGestureRecognizers to ensure focus is properly managed
@@ -26,6 +38,8 @@ namespace KidsChoreApp.Pages.Family
                     Command = new Command(OnDigitEntryClicked)
                 });
             }
+
+            Console.WriteLine("User Id AddChildPage ctor = " + _userId + "********************************************************************");
         }
 
 
@@ -46,6 +60,8 @@ namespace KidsChoreApp.Pages.Family
                     // Implement avatar selection
                     break;
             }
+
+            Console.WriteLine("User Id AddChildPage OnChildImageClicked = " + _userId + "********************************************************************");
         }
 
         private async void OnSaveClicked(object sender, EventArgs e)
@@ -76,11 +92,14 @@ namespace KidsChoreApp.Pages.Family
                     Name = ChildNameEntry.Text,
                     Image = _selectedImage, // Replace with actual image selection logic
                     Money = weeklyAllowance,
-                    Passcode = passcode
+                    Passcode = passcode,
+                    UserId = _userId
                 };
 
+                Console.WriteLine("User Id AddChildPage OnSaveClicked = " + _userId + "********************************************************************");
+
                 await _childService.SaveChildAsync(child);
-                await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+                await Shell.Current.GoToAsync($"//{nameof(HomePage)}?userId={_userId}");
             }
             else
             {

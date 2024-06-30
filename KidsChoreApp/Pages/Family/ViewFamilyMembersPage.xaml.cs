@@ -19,8 +19,8 @@ namespace KidsChoreApp.Pages.Family
 
         private async void LoadFamilyMembers()
         {
-            var children = await _childService.GetAllChildrenAsync();
-            FamilyMembersListView.ItemsSource = children;
+            //var children = await _childService.GetAllChildrenAsync();
+            //FamilyMembersListView.ItemsSource = children;
         }
 
         private async void OnFamilyMemberTapped(object sender, ItemTappedEventArgs e)

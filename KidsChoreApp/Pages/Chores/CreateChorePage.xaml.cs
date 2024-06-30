@@ -22,9 +22,9 @@ namespace KidsChoreApp.Pages.Chores
 
         private async void LoadFamilyMembers()
         {
-            var children = await _childService.GetAllChildrenAsync();
+            //var children = await _childService.GetAllChildrenAsync();
 
-            AssignedToPicker.ItemsSource = children;
+            //AssignedToPicker.ItemsSource = children;
         }
 
         private async void OnSaveClicked(object sender, EventArgs e)
