@@ -50,19 +50,13 @@ namespace KidsChoreApp.Pages
             Children = new ObservableCollection<Child>();
 
             BindingContext = this;
-
-            Console.WriteLine("User Id in HomePage ctor = " + UserId + "********************************************************************");
-
         }
 
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-
             await LoadData();
-
-            Console.WriteLine("User Id in HomePage OnAppearing = " + UserId + "********************************************************************");
         }
 
         private async Task LoadData()
@@ -100,8 +94,6 @@ namespace KidsChoreApp.Pages
 
         private async void OnAddChildClicked(object sender, EventArgs e)
         {
-            Console.WriteLine("User Id in HomePage OnAddChildClicked = " + _userId + "********************************************************************");
-
             await Shell.Current.GoToAsync($"{nameof(AddChildPage)}?userId={_userId}");
         }
 

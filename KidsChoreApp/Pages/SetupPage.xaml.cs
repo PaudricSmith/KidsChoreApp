@@ -76,8 +76,6 @@ namespace KidsChoreApp.Pages
             // Retrieve the existing User record using the UserId that was passed from the RegisterLoginPage query
             _user = await _userService.GetUserByIdAsync(UserId);
 
-            Console.WriteLine("User Id in SetupPage OnSavePasscodeClicked: " + _user.Id + "**************************************************************************");
-
             // Retrieve the existing parent record using the UserId
             var parent = await _parentService.GetParentByUserIdAsync(_user.Id);
 
@@ -95,8 +93,8 @@ namespace KidsChoreApp.Pages
             _user.IsSetupCompleted = true;
             await _userService.UpdateUserAsync(_user);
 
-            // Navigate to the home page
-            Application.Current.MainPage = new AppShell(); // new AppShell will show the first shell content which is the 'HomePage'
+            // new AppShell will show the first shell content which is the 'HomePage'
+            Application.Current.MainPage = new AppShell(); 
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}?userId={_user.Id}");
         }
     }
