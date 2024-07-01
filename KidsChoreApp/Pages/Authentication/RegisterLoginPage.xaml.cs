@@ -14,9 +14,9 @@ namespace KidsChoreApp.Pages.Authentication
         private readonly ChildService _childService;
         private bool _isRegistering;
         private bool _isPasswordVisible;
-        private string _email;
-        private string _password;
-        private string _confirmPassword;
+        private string _email = string.Empty;
+        private string _password = string.Empty;
+        private string _confirmPassword = string.Empty;
 
 
         public bool IsRegistering
@@ -142,7 +142,10 @@ namespace KidsChoreApp.Pages.Authentication
                     await _parentService.SaveParentAsync(parentAccount);
 
                     await DisplayAlert("Success", "Registration successful", "OK");
-                    Application.Current.MainPage = new AppShell();
+
+                    if (Application.Current != null)
+                        Application.Current.MainPage = new AppShell();
+
                     await Shell.Current.GoToAsync($"//{nameof(SetupPage)}?userId={user.Id}");
                 }
                 else
@@ -163,7 +166,9 @@ namespace KidsChoreApp.Pages.Authentication
                     }
                     else
                     {
-                        Application.Current.MainPage = new AppShell();
+                        if (Application.Current != null)
+                            Application.Current.MainPage = new AppShell();
+
                         await Shell.Current.GoToAsync($"//{nameof(HomePage)}?userId={user.Id}");
                     }
                 }
@@ -175,7 +180,7 @@ namespace KidsChoreApp.Pages.Authentication
             }
         }
 
-        private bool ValidateInputs(string email, string password, string confirmPassword = null)
+        private bool ValidateInputs(string email, string password, string? confirmPassword = null)
         {
             EmailErrorLabel.IsVisible = false;
             ConfirmPasswordErrorLabel.IsVisible = false;
@@ -242,8 +247,8 @@ namespace KidsChoreApp.Pages.Authentication
         }
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public new event PropertyChangedEventHandler? PropertyChanged;
+        protected new void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

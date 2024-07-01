@@ -15,9 +15,10 @@ namespace KidsChoreApp.Pages
         private readonly ParentService _parentService;
         private readonly ChildService _childService;
 
-        private Parent _parent;
+        private Parent? _parent;
         private int _userId;
         private bool _isPadlockUnlocked = false;
+
 
         public ObservableCollection<Child> Children { get; set; }
 
@@ -50,8 +51,15 @@ namespace KidsChoreApp.Pages
             Children = new ObservableCollection<Child>();
 
             BindingContext = this;
+
+            Loaded += OnPageLoaded;
         }
 
+
+        private async void OnPageLoaded(object? sender, EventArgs e)
+        {
+            await LoadData();
+        }
 
         protected override async void OnAppearing()
         {
@@ -60,7 +68,8 @@ namespace KidsChoreApp.Pages
         }
 
         private async Task LoadData()
-        {          
+        {
+            _parent = await _parentService.GetParentByUserIdAsync(UserId);
             var children = await _childService.GetAllChildrenByUserIdAsync(UserId);
 
             Children.Clear();
@@ -78,8 +87,6 @@ namespace KidsChoreApp.Pages
             }
             else
             {
-                _parent = await _parentService.GetParentByUserIdAsync(UserId);
-
                 string result = await DisplayPromptAsync("Enter your Parental Passcode", "", maxLength: 4, keyboard: Keyboard.Numeric);
                 if (result == _parent?.Passcode)
                 {
@@ -148,8 +155,8 @@ namespace KidsChoreApp.Pages
             await Shell.Current.GoToAsync(nameof(DebugPage));
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public new event PropertyChangedEventHandler? PropertyChanged;
+        protected new void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

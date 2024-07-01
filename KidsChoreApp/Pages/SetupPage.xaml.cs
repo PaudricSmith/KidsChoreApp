@@ -94,7 +94,8 @@ namespace KidsChoreApp.Pages
             await _userService.UpdateUserAsync(_user);
 
             // new AppShell will show the first shell content which is the 'HomePage'
-            Application.Current.MainPage = new AppShell(); 
+            if (Application.Current != null)
+                Application.Current.MainPage = new AppShell(); 
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}?userId={_user.Id}");
         }
     }

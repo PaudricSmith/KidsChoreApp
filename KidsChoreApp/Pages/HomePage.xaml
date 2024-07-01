@@ -61,8 +61,8 @@
             <Button Text="Feedback" Clicked="OnFeedbackClicked" />
         </StackLayout>
 
-        <StackLayout Grid.Row="5" Grid.ColumnSpan="2" Spacing="10" Orientation="Horizontal" HorizontalOptions="Center">
+        <!--<StackLayout Grid.Row="5" Grid.ColumnSpan="2" Spacing="10" Orientation="Horizontal" HorizontalOptions="Center">
             <Button Text="Debug" Clicked="OnDebugClicked" />
-        </StackLayout>
+        </StackLayout>-->
     </Grid>
 </ContentPage>

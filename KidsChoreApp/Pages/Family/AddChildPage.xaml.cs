@@ -38,8 +38,6 @@ namespace KidsChoreApp.Pages.Family
                     Command = new Command(OnDigitEntryClicked)
                 });
             }
-
-            Console.WriteLine("User Id AddChildPage ctor = " + _userId + "********************************************************************");
         }
 
 
@@ -60,8 +58,6 @@ namespace KidsChoreApp.Pages.Family
                     // Implement avatar selection
                     break;
             }
-
-            Console.WriteLine("User Id AddChildPage OnChildImageClicked = " + _userId + "********************************************************************");
         }
 
         private async void OnSaveClicked(object sender, EventArgs e)
@@ -95,8 +91,6 @@ namespace KidsChoreApp.Pages.Family
                     Passcode = passcode,
                     UserId = _userId
                 };
-
-                Console.WriteLine("User Id AddChildPage OnSaveClicked = " + _userId + "********************************************************************");
 
                 await _childService.SaveChildAsync(child);
                 await Shell.Current.GoToAsync($"//{nameof(HomePage)}?userId={_userId}");
