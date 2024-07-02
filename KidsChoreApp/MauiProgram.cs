@@ -55,6 +55,8 @@ namespace KidsChoreApp
             builder.Services.AddTransient<SetupPage>();
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<AddChildPage>();
+            builder.Services.AddTransient<FeedbackPage>();
+            builder.Services.AddTransient<FeedbackFormPage>();
             builder.Services.AddTransient<CreateChorePage>();
             builder.Services.AddTransient<ViewChoresPage>();
             builder.Services.AddTransient<ChoreDetailsPage>();

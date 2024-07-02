@@ -10,7 +10,7 @@ namespace KidsChoreApp.Pages
         private readonly UserService _userService;
         private readonly ParentService _parentService;
 
-        private User _user;
+        private User? _user;
         private List<Entry> _passcodeEntries;
 
         public int UserId { get; set; }
@@ -39,7 +39,7 @@ namespace KidsChoreApp.Pages
             KeypadViewComponent.IsVisible = true;
         }
 
-        private void OnKeypadNumClicked(object sender, string digit)
+        private void OnKeypadNumClicked(object _, string digit)
         {
             foreach (var entry in _passcodeEntries)
             {
@@ -51,7 +51,7 @@ namespace KidsChoreApp.Pages
             }
         }
 
-        private void OnBackspaceClicked(object sender, EventArgs e)
+        private void OnBackspaceClicked(object _, EventArgs e)
         {
             for (int i = _passcodeEntries.Count - 1; i >= 0; i--)
             {

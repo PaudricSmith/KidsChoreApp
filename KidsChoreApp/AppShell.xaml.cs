@@ -14,8 +14,11 @@ namespace KidsChoreApp
 
             Routing.RegisterRoute(nameof(RegisterLoginPage), typeof(RegisterLoginPage));
             Routing.RegisterRoute(nameof(SetupPage), typeof(SetupPage));
-            Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
+
             Routing.RegisterRoute(nameof(AddChildPage), typeof(AddChildPage));
+            Routing.RegisterRoute(nameof(FeedbackPage), typeof(FeedbackPage));
+            Routing.RegisterRoute(nameof(FeedbackFormPage), typeof(FeedbackFormPage));
+
             Routing.RegisterRoute(nameof(DebugPage), typeof(DebugPage));
         }
     }

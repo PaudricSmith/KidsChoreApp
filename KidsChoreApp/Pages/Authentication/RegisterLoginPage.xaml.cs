@@ -146,7 +146,7 @@ namespace KidsChoreApp.Pages.Authentication
                     if (Application.Current != null)
                         Application.Current.MainPage = new AppShell();
 
-                    await Shell.Current.GoToAsync($"//{nameof(SetupPage)}?userId={user.Id}");
+                    await Shell.Current.GoToAsync($"{nameof(SetupPage)}?userId={user.Id}");
                 }
                 else
                 {
@@ -162,7 +162,7 @@ namespace KidsChoreApp.Pages.Authentication
                     var user = await _userService.GetUserByEmailAsync(Email);
                     if (!user.IsSetupCompleted)
                     {
-                        await Shell.Current.GoToAsync($"//{nameof(SetupPage)}?userId={user.Id}");
+                        await Shell.Current.GoToAsync($"{nameof(SetupPage)}?userId={user.Id}");
                     }
                     else
                     {

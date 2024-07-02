@@ -123,6 +123,7 @@ namespace KidsChoreApp.Pages
 
         private async void OnFeedbackClicked(object sender, EventArgs e)
         {
+            await Shell.Current.GoToAsync(nameof(FeedbackPage));
             //await Navigation.PushAsync(new FeedbackPage());
         }
 

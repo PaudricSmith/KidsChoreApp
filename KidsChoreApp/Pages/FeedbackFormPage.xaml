@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KidsChoreApp.Pages.FeedbackFormPage"
+             Title="Feedback">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="10">
+            <Label Text="Let us know what is the problem" FontSize="Large" HorizontalOptions="Center"/>
+            <Editor x:Name="MessageEditor" Placeholder="Your Message" HeightRequest="200"/>
+
+            <Button Text="Attach Files" Clicked="OnAttachFilesClicked" Padding="10" />
+
+            <!-- Display attached files -->
+            <CollectionView x:Name="AttachmentsCollectionView" IsVisible="False" Margin="10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding FileName}" Grid.Column="0" VerticalOptions="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Send Feedback" Clicked="OnSendClicked" Padding="10" />
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
