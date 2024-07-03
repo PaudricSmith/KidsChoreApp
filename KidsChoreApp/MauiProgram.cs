@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using SQLite;
 using MauiIcons.Fluent;
 using KidsChoreApp.Pages;
+using KidsChoreApp.Pages.Feedback;
 
 
 namespace KidsChoreApp
@@ -55,6 +56,7 @@ namespace KidsChoreApp
             builder.Services.AddTransient<SetupPage>();
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<AddChildPage>();
+            builder.Services.AddTransient<SettingsPage>();
             builder.Services.AddTransient<FeedbackPage>();
             builder.Services.AddTransient<FeedbackFormPage>();
             builder.Services.AddTransient<CreateChorePage>();

@@ -1,6 +1,7 @@
 using KidsChoreApp.Models;
 using KidsChoreApp.Pages.Debugging;
 using KidsChoreApp.Pages.Family;
+using KidsChoreApp.Pages.Feedback;
 using KidsChoreApp.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -113,7 +114,7 @@ namespace KidsChoreApp.Pages
         {
             if (IsPadlockUnlocked)
             {
-                //await Navigation.PushAsync(new SettingsPage());
+                await Shell.Current.GoToAsync(nameof(SettingsPage));
             }
             else
             {
@@ -124,7 +125,6 @@ namespace KidsChoreApp.Pages
         private async void OnFeedbackClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(FeedbackPage));
-            //await Navigation.PushAsync(new FeedbackPage());
         }
 
         private async void OnChildSelected(object sender, SelectionChangedEventArgs e)

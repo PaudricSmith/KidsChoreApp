@@ -1,6 +1,6 @@
 
 
-namespace KidsChoreApp.Pages
+namespace KidsChoreApp.Pages.Feedback
 {
     public partial class FeedbackFormPage : ContentPage
     {

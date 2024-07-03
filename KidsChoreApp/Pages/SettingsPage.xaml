@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KidsChoreApp.Pages.SettingsPage"
+             Title="Settings">
+    
+    <StackLayout Padding="20">
+        
+        <Label Text="Currency" />
+        
+        <Picker x:Name="CurrencyPicker">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>USD</x:String>
+                    <x:String>EUR</x:String>
+                    <x:String>GBP</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        
+        <Button Text="Logout" Clicked="OnLogoutClicked"/>
+    
+    </StackLayout>
+    
+</ContentPage>

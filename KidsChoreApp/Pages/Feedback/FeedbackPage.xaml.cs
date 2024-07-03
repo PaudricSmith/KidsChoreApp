@@ -1,4 +1,6 @@
-namespace KidsChoreApp.Pages
+
+
+namespace KidsChoreApp.Pages.Feedback
 {
     public partial class FeedbackPage : ContentPage
     {
@@ -6,6 +8,7 @@ namespace KidsChoreApp.Pages
         {
             InitializeComponent();
         }
+
 
         private async void OnLoveAppClicked(object sender, EventArgs e)
         {

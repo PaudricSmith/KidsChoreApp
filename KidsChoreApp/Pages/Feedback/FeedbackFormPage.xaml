@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KidsChoreApp.Pages.FeedbackFormPage"
+             x:Class="KidsChoreApp.Pages.Feedback.FeedbackFormPage"
              Title="Feedback">
 
     <ScrollView>
         <StackLayout Padding="20" Spacing="10">
-            <Label Text="Let us know what is the problem" FontSize="Large" HorizontalOptions="Center"/>
+            <Label Text="Let us know about any issues or bugs please." FontSize="Medium" HorizontalOptions="Center"/>
             <Editor x:Name="MessageEditor" Placeholder="Your Message" HeightRequest="200"/>
 
+            <Label Text="Attach files or images of any bugs." FontSize="Medium" HorizontalOptions="Center" />
             <Button Text="Attach Files" Clicked="OnAttachFilesClicked" Padding="10" />
 
             <!-- Display attached files -->
