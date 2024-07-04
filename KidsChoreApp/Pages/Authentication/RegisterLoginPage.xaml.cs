@@ -1,3 +1,7 @@
+#if ANDROID
+using Android.Content.PM;
+#endif
+
 using KidsChoreApp.Models;
 using KidsChoreApp.Services;
 using System.ComponentModel;
@@ -101,6 +105,13 @@ namespace KidsChoreApp.Pages.Authentication
             });
         }
 
+
+        protected override void OnAppearing()
+        {
+#if ANDROID
+            Platform.CurrentActivity.RequestedOrientation = ScreenOrientation.Portrait;
+#endif
+        }
 
         private void ToggleRegisterLogin()
         {
