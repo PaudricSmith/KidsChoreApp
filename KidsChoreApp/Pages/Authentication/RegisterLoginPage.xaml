@@ -18,7 +18,7 @@
 
     <Grid Padding="20" VerticalOptions="CenterAndExpand" RowSpacing="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -35,23 +35,23 @@
 
         <!-- Email Entry and Error Label -->
         <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="Center">
-            <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" WidthRequest="300" Text="{Binding Email}" />
+            <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" WidthRequest="250" Text="{Binding Email}" />
             <Label x:Name="EmailErrorLabel" TextColor="Red" IsVisible="False" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="Center" />
         </Grid>
 
-        <!-- Password Entry with Toggle Button -->
-        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="{Binding IsPasswordVisible}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" WidthRequest="300" Text="{Binding Password}" HorizontalOptions="FillAndExpand" />
-        <ImageButton x:Name="PasswordToggle" Clicked="OnPasswordEyeToggleClicked" Grid.Row="1" Grid.Column="4" />
+        <!-- Password Entry with Eye Toggle Button -->
+        <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="{Binding IsPasswordVisible}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" WidthRequest="250" Text="{Binding Password}" />
+        <ImageButton x:Name="PasswordToggle" Clicked="OnPasswordEyeToggleClicked" Grid.Row="1" Grid.Column="4" HorizontalOptions="FillAndExpand" />
 
         <!-- Confirm Password Entry and Error Label -->
         <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="Center">
-            <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm Password" IsPassword="True" WidthRequest="300" Text="{Binding ConfirmPassword}" IsVisible="{Binding IsRegistering}" />
+            <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm Password" IsPassword="True" WidthRequest="250" Text="{Binding ConfirmPassword}" IsVisible="{Binding IsRegistering}" />
             <Label x:Name="ConfirmPasswordErrorLabel" TextColor="Red" IsVisible="False" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="Center" />
         </Grid>
 
         <!-- Main Action Button -->
         <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" HorizontalOptions="Center">
-            <Button x:Name="MainActionButton" Text="{Binding MainActionText}" Clicked="OnMainActionButtonClicked" WidthRequest="300" />
+            <Button x:Name="MainActionButton" Text="{Binding MainActionText}" Clicked="OnMainActionButtonClicked" WidthRequest="250" />
         </Grid>
 
         <!-- Toggle Link and App Tip -->
