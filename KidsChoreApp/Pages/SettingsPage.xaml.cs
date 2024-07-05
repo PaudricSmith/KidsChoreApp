@@ -1,4 +1,3 @@
-using KidsChoreApp.Models;
 using KidsChoreApp.Pages.Authentication;
 using KidsChoreApp.Services;
 
@@ -9,18 +8,8 @@ namespace KidsChoreApp.Pages
     public partial class SettingsPage : ContentPage
     {
         private readonly UserService _userService;
-        private User _user;
+        private readonly IServiceProvider _serviceProvider;
         private int _userId;
-
-        public User User
-        {
-            get => _user;
-            set
-            {
-                _user = value;
-                OnPropertyChanged();
-            }
-        }
 
         public int UserId
         {
@@ -32,11 +21,12 @@ namespace KidsChoreApp.Pages
         }
 
 
-        public SettingsPage(UserService userService)
+        public SettingsPage(IServiceProvider serviceProvider, UserService userService)
         {
             InitializeComponent();
 
             _userService = userService;
+            _serviceProvider = serviceProvider;
 
             BindingContext = this;
         }
@@ -46,21 +36,12 @@ namespace KidsChoreApp.Pages
         {
             base.OnAppearing();
 
-            User = await _userService.GetUserByIdAsync(UserId); 
-
-            LoadCurrentCurrency();
-        }
-
-        private async void LoadCurrentCurrency()
-        {
-            var currency = await _userService.GetUserPreferredCurrency(UserId);
-            CurrencyPicker.SelectedItem = currency;
+            CurrencyPicker.SelectedItem = await _userService.GetUserPreferredCurrency(UserId);
         }
 
         private async void OnCurrencySelected(object sender, EventArgs e)
         {
-            var selectedCurrency = CurrencyPicker.SelectedItem as string;
-            if (selectedCurrency != null)
+            if (CurrencyPicker.SelectedItem is string selectedCurrency)
             {
                 await _userService.SetUserPreferredCurrency(UserId, selectedCurrency);
             }
@@ -68,13 +49,11 @@ namespace KidsChoreApp.Pages
 
         private async void OnLogoutClicked(object sender, EventArgs e)
         {
-            // Implement logout logic
-            
-            //await _userService.LogoutAsync();
+            await _userService.LogoutAsync();
 
-            if (Application.Current != null) 
-                Application.Current.MainPage = new AppShell();
-            await Shell.Current.GoToAsync(nameof(RegisterLoginPage));
+            if (Application.Current != null)
+                Application.Current.MainPage = new NavigationPage(_serviceProvider.GetService<RegisterLoginPage>());
+
         }
     }
 }

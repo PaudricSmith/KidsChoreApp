@@ -109,7 +109,8 @@ namespace KidsChoreApp.Pages.Authentication
         protected override void OnAppearing()
         {
 #if ANDROID
-            Platform.CurrentActivity.RequestedOrientation = ScreenOrientation.Portrait;
+            if (Platform.CurrentActivity != null)
+                Platform.CurrentActivity.RequestedOrientation = ScreenOrientation.Portrait;
 #endif
         }
 

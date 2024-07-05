@@ -73,6 +73,15 @@ namespace KidsChoreApp.Services
             return hashedPassword == storedHash;
         }
 
+        public async Task LogoutAsync()
+        {
+            // Perform any necessary cleanup here
+            // Clear user session data, tokens, etc.
+            // If there's nothing specific to do, this can be left empty or removed.
+
+            await Task.CompletedTask;
+        }
+
 
         // New methods for managing preferred currency
         public async Task<string> GetUserPreferredCurrency(int userId)
