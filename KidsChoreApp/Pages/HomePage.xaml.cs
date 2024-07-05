@@ -5,6 +5,7 @@ using KidsChoreApp.Pages.Feedback;
 using KidsChoreApp.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 
 
@@ -13,13 +14,14 @@ namespace KidsChoreApp.Pages
     [QueryProperty(nameof(UserId), "userId")]
     public partial class HomePage : ContentPage, INotifyPropertyChanged
     {
+        private readonly UserService _userService;
         private readonly ParentService _parentService;
         private readonly ChildService _childService;
 
+        private User? _user;
         private Parent? _parent;
         private int _userId;
         private bool _isPadlockUnlocked = false;
-
 
         public ObservableCollection<Child> Children { get; set; }
 
@@ -29,6 +31,16 @@ namespace KidsChoreApp.Pages
             set
             {
                 _userId = value;
+            }
+        }
+
+        public User? User
+        {
+            get => _user;
+            set
+            {
+                _user = value;
+                OnPropertyChanged();
             }
         }
 
@@ -43,9 +55,10 @@ namespace KidsChoreApp.Pages
         }
 
 
-        public HomePage(ParentService parentService, ChildService childService)
+        public HomePage(UserService userService, ParentService parentService, ChildService childService)
         {
             InitializeComponent();
+            _userService = userService;
             _parentService = parentService;
             _childService = childService;
 
@@ -70,12 +83,13 @@ namespace KidsChoreApp.Pages
 
         private async Task LoadData()
         {
+            User = await _userService.GetUserByIdAsync(UserId);
             _parent = await _parentService.GetParentByUserIdAsync(UserId);
-            var children = await _childService.GetAllChildrenByUserIdAsync(UserId);
 
+            var children = await _childService.GetAllChildrenByUserIdAsync(UserId);
             Children.Clear();
             foreach (var child in children)
-            {
+            {  
                 Children.Add(child);
             }
         }
@@ -114,7 +128,7 @@ namespace KidsChoreApp.Pages
         {
             if (IsPadlockUnlocked)
             {
-                await Shell.Current.GoToAsync(nameof(SettingsPage));
+                await Shell.Current.GoToAsync($"{nameof(SettingsPage)}?userId={_userId}");
             }
             else
             {

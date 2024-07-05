@@ -4,19 +4,29 @@
              x:Class="KidsChoreApp.Pages.SettingsPage"
              Title="Settings">
     
-    <StackLayout Padding="20">
+    <StackLayout Padding="20" Spacing="20">
         
         <Label Text="Currency" />
-        
-        <Picker x:Name="CurrencyPicker">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>USD</x:String>
-                    <x:String>EUR</x:String>
-                    <x:String>GBP</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+
+        <Frame BackgroundColor="AliceBlue" 
+               CornerRadius="10"
+               Padding="5"
+               HasShadow="True">
+            <Picker x:Name="CurrencyPicker"
+                    Title="Select Currency"
+                    FontSize="Medium"
+                    BackgroundColor="AntiqueWhite"
+                    HorizontalOptions="FillAndExpand"
+                    SelectedIndexChanged="OnCurrencySelected">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>USD</x:String>
+                        <x:String>EUR</x:String>
+                        <x:String>GBP</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </Frame>
         
         <Button Text="Logout" Clicked="OnLogoutClicked"/>
     

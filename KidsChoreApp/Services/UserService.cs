@@ -42,7 +42,8 @@ namespace KidsChoreApp.Services
             {
                 Email = email,
                 PasswordHash = HashPassword(password),
-                IsSetupCompleted = false
+                IsSetupCompleted = false,
+                PreferredCurrency = "EUR" // Default to Euro currency
             };
 
             await _database.InsertAsync(newUser);
@@ -70,6 +71,24 @@ namespace KidsChoreApp.Services
             var hashedPassword = HashPassword(password);
 
             return hashedPassword == storedHash;
+        }
+
+
+        // New methods for managing preferred currency
+        public async Task<string> GetUserPreferredCurrency(int userId)
+        {
+            var user = await GetUserByIdAsync(userId);
+            return user?.PreferredCurrency ?? "EUR"; // Return default currency if user not found
+        }
+
+        public async Task SetUserPreferredCurrency(int userId, string currency)
+        {
+            var user = await GetUserByIdAsync(userId);
+            if (user != null)
+            {
+                user.PreferredCurrency = currency;
+                await UpdateUserAsync(user);
+            }
         }
     }
 }
