@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 
 namespace KidsChoreApp.Pages
@@ -54,6 +55,8 @@ namespace KidsChoreApp.Pages
             }
         }
 
+        public ICommand OnChildTappedCommand { get; }
+
 
         public HomePage(UserService userService, ParentService parentService, ChildService childService)
         {
@@ -63,6 +66,7 @@ namespace KidsChoreApp.Pages
             _childService = childService;
 
             Children = new ObservableCollection<Child>();
+            OnChildTappedCommand = new Command<Child>(async (child) => await OnChildTapped(child));
 
             BindingContext = this;
 
@@ -141,22 +145,21 @@ namespace KidsChoreApp.Pages
             await Shell.Current.GoToAsync(nameof(FeedbackPage));
         }
 
-        private async void OnChildSelected(object sender, SelectionChangedEventArgs e)
+        private async Task OnChildTapped(Child child)
         {
-            var selectedChild = e.CurrentSelection[0] as Child;
-            if (selectedChild != null)
+            if (child != null)
             {
                 if (IsPadlockUnlocked)
                 {
-                    //await Navigation.PushAsync(new ChildPage(selectedChild));
+                    await Shell.Current.GoToAsync($"{nameof(ChildPage)}?childId={child.Id}");
                 }
                 else
                 {
-                    string result = await DisplayPromptAsync($"Enter {selectedChild.Name}'s Passcode", "", maxLength: 4, keyboard: Keyboard.Numeric);
-                    if (result == selectedChild.Passcode)
+                    string result = await DisplayPromptAsync($"Enter {child.Name}'s Passcode", "", maxLength: 4, keyboard: Keyboard.Numeric);
+                    if (result == child.Passcode)
                     {
-                        //await Navigation.PushAsync(new ChildPage(selectedChild));
-                    }
+                        await Shell.Current.GoToAsync($"{nameof(ChildPage)}?childId={child.Id}");
+                    } 
                     else
                     {
                         await DisplayAlert("Error", "Incorrect passcode", "OK");

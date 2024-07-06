@@ -1,36 +1,64 @@
 using KidsChoreApp.Models;
 using KidsChoreApp.Services;
+using System.Collections.ObjectModel;
 
 
 namespace KidsChoreApp.Pages.Family
 {
+    [QueryProperty(nameof(ChildId), "childId")]
     public partial class ChildPage : ContentPage
     {
-        //private readonly Child _child;
-        private readonly ChoreDatabase _choreDatabase;
+        private readonly ChildService _childService;
+        private readonly ChoreService _choreService;
+        private int _childId;
+        private Child? _child;
 
-        //public ChildPage(Child child, ChoreDatabase choreDatabase)
-        //{
-        //    InitializeComponent();
-        //    _child = child;
-        //    _choreDatabase = choreDatabase;
-        //    BindingContext = _child;
-        //    LoadChores();
-        //}
+        public ObservableCollection<Chore> Chores { get; set; }
 
-        public ChildPage(ChoreDatabase choreDatabase)
+        public int ChildId
         {
-            InitializeComponent();
-            //_child = child;
-            _choreDatabase = choreDatabase;
-            //BindingContext = _child;
-            LoadChores();
+            get => _childId;
+            set
+            {
+                _childId = value;
+                LoadChildData(value);
+            }
         }
 
-        private async void LoadChores()
+
+        public ChildPage(ChildService childService, ChoreService choreService)
         {
-            //var chores = await _choreDatabase.GetChoresForChildAsync(_child.Id);
-            //ChoresListView.ItemsSource = chores;
+            InitializeComponent();
+
+            _childService = childService;
+            _choreService = choreService;
+
+            Chores = new ObservableCollection<Chore>();
+            
+            BindingContext = this;
+        }
+
+
+        private async void LoadChildData(int childId)
+        {
+            _child = await _childService.GetChildByIdAsync(childId);
+
+            BindingContext = _child;
+            
+            LoadChores(childId);
+        }
+
+        private async void LoadChores(int childId)
+        {
+            var chores = await _choreService.GetChoresByChildIdAsync(childId);
+
+            Chores.Clear();
+            foreach (var chore in chores)
+            {
+                Chores.Add(chore);
+            }
+
+            ChoresListView.ItemsSource = Chores;
         }
 
         private async void OnChoreCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -42,18 +70,19 @@ namespace KidsChoreApp.Pages.Family
             {
                 if (checkBox.IsChecked)
                 {
-                    //_child.LifetimeEarnings += chore.Worth;
-                    //_child.WeeklyEarnings += chore.Worth;
+                    _child.LifetimeEarnings += chore.Worth;
+                    _child.WeeklyEarnings += chore.Worth;
                 }
                 else
                 {
-                    //_child.LifetimeEarnings -= chore.Worth;
-                    //_child.WeeklyEarnings -= chore.Worth;
+                    _child.LifetimeEarnings -= chore.Worth;
+                    _child.WeeklyEarnings -= chore.Worth;
                 }
 
-                await _choreDatabase.SaveChoreAsync(chore);
-                BindingContext = null;
-                //BindingContext = _child;
+                chore.IsComplete = checkBox.IsChecked;
+
+                await _choreService.SaveChoreAsync(chore);
+                await _childService.SaveChildAsync(_child); // Save the updated child earnings
             }
         }
 

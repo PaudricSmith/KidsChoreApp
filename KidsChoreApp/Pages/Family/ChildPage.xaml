@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KidsChoreApp.Pages.Family.ChildPage">
+             x:Class="KidsChoreApp.Pages.Family.ChildPage"
+             xmlns:models="clr-namespace:KidsChoreApp.Models"
+             xmlns:family="clr-namespace:KidsChoreApp.Pages.Family"
+             x:DataType="models:Child"
+             Title="{Binding Name}">
 
     <StackLayout Padding="20">
+
         <ImageButton x:Name="ChildImage" Source="{Binding Image}" Clicked="OnChangeImageClicked" />
         <Label Text="{Binding Name}" FontSize="24" HorizontalOptions="Center" />
         <Label Text="Lifetime Earnings" FontSize="18" />
-        <Label Text="{Binding LifetimeEarnings}" FontSize="18" />
+        <Label Text="{Binding LifetimeEarnings, StringFormat='€{0:F2}'}" FontSize="18" />
         <Label Text="Weekly Earnings" FontSize="18" />
-        <Label Text="{Binding WeeklyEarnings}" FontSize="18" />
+        <Label Text="{Binding WeeklyEarnings, StringFormat='€{0:F2}'}" FontSize="18" />
+
         <ListView x:Name="ChoresListView">
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="models:Chore">
                     <ViewCell>
                         <StackLayout Orientation="Horizontal">
                             <Image Source="{Binding Image}" WidthRequest="40" HeightRequest="40" />
@@ -24,5 +30,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
     </StackLayout>
+
 </ContentPage>

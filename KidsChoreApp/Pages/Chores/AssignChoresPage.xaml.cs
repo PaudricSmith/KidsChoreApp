@@ -7,16 +7,16 @@ namespace KidsChoreApp.Pages.Chores
 {
     public partial class AssignChoresPage : ContentPage
     {
-        private readonly ChoreDatabase _choreDatabase;
+        private readonly ChoreService _choreService;
         private readonly ChildService _childService;
 
         public ObservableCollection<Chore> Chores { get; set; }
         public ObservableCollection<Child> Children { get; set; }
 
-        public AssignChoresPage(ChoreDatabase choreDatabase, ChildService childService)
+        public AssignChoresPage(ChoreService choreService, ChildService childService)
         {
             InitializeComponent();
-            _choreDatabase = choreDatabase;
+            _choreService = choreService;
             _childService = childService;
 
             LoadChores();
@@ -26,8 +26,10 @@ namespace KidsChoreApp.Pages.Chores
 
         private async void LoadChores()
         {
-            var chores = await _choreDatabase.GetChoresAsync();
+            var chores = await _choreService.GetChoresByChildIdAsync(1);
+
             Chores = new ObservableCollection<Chore>(chores);
+
             ChoresListView.ItemsSource = Chores;
         }
 
@@ -56,7 +58,7 @@ namespace KidsChoreApp.Pages.Chores
             var confirm = await DisplayAlert("Confirm", "Are you sure you want to delete this chore?", "Yes", "No");
             if (confirm)
             {
-                await _choreDatabase.DeleteChoreAsync(chore);
+                await _choreService.DeleteChoreAsync(chore);
                 Chores.Remove(chore);
             }
         }

@@ -39,13 +39,16 @@
 
         <ImageButton x:Name="PadlockToggle" Clicked="OnPadlockToggleClicked" Grid.Row="1" Grid.Column="1" />
 
-        <CollectionView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding Children}" SelectionMode="Single" SelectionChanged="OnChildSelected">
+        <CollectionView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding Children}" SelectionMode="None">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="2" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Child">
                     <Frame CornerRadius="10" Padding="10" HasShadow="True" BorderColor="Black" Margin="10">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type pages:HomePage}}, Path=OnChildTappedCommand}" CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
                         <StackLayout>
                             <Image Source="{Binding Image}" WidthRequest="100" HeightRequest="100" />
                             <Label Text="{Binding Name}" HorizontalOptions="Center" />

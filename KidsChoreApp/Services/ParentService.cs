@@ -8,6 +8,7 @@ namespace KidsChoreApp.Services
     {
         private readonly SQLiteAsyncConnection _database;
 
+
         public ParentService(SQLiteAsyncConnection database)
         {
             _database = database;

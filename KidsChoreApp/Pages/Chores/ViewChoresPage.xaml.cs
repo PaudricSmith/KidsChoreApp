@@ -6,15 +6,15 @@ namespace KidsChoreApp.Pages.Chores
 {
     public partial class ViewChoresPage : ContentPage
     {
-        private readonly ChoreDatabase _choreDatabase;
+        private readonly ChoreService _choreService;
         private readonly ChildService _familyMemberDatabase;
 
 
-        public ViewChoresPage(ChoreDatabase choreDatabase, ChildService familyMemberDatabase)
+        public ViewChoresPage(ChoreService choreService, ChildService familyMemberDatabase)
         {
             InitializeComponent();
 
-            _choreDatabase = choreDatabase;
+            _choreService = choreService;
             _familyMemberDatabase = familyMemberDatabase;
 
             LoadChores();
@@ -23,7 +23,7 @@ namespace KidsChoreApp.Pages.Chores
 
         private async void LoadChores()
         {
-            var chores = await _choreDatabase.GetChoresAsync();
+            var chores = await _choreService.GetChoresByChildIdAsync(1);
             ChoresListView.ItemsSource = null;
             ChoresListView.ItemsSource = chores;
         }
@@ -31,7 +31,7 @@ namespace KidsChoreApp.Pages.Chores
         private async void OnChoreTapped(object sender, ItemTappedEventArgs e)
         {
             var chore = (Chore)e.Item;
-            await Navigation.PushAsync(new ChoreDetailsPage(_choreDatabase, chore));
+            await Navigation.PushAsync(new ChoreDetailsPage(_choreService, chore));
         }
 
         //private async void OnChoreTapped(object sender, ItemTappedEventArgs e)
@@ -59,7 +59,7 @@ namespace KidsChoreApp.Pages.Chores
 
         private async void OnAddChoreClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CreateChorePage(_choreDatabase, _familyMemberDatabase));
+            await Navigation.PushAsync(new CreateChorePage(_choreService, _familyMemberDatabase));
         }
 
         protected override async void OnAppearing()

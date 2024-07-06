@@ -49,19 +49,26 @@ namespace KidsChoreApp
             builder.Services.AddSingleton<UserService>();
             builder.Services.AddSingleton<ParentService>();
             builder.Services.AddSingleton<ChildService>();
-            builder.Services.AddSingleton<ChoreDatabase>();
+            builder.Services.AddSingleton<ChoreService>();
 
             // Register pages
             builder.Services.AddTransient<RegisterLoginPage>();
             builder.Services.AddTransient<SetupPage>();
+
             builder.Services.AddTransient<HomePage>();
+            
             builder.Services.AddTransient<AddChildPage>();
+            builder.Services.AddTransient<ChildPage>();
+            
             builder.Services.AddTransient<SettingsPage>();
+            
             builder.Services.AddTransient<FeedbackPage>();
             builder.Services.AddTransient<FeedbackFormPage>();
+            
             builder.Services.AddTransient<CreateChorePage>();
             builder.Services.AddTransient<ViewChoresPage>();
             builder.Services.AddTransient<ChoreDetailsPage>();
+            
             builder.Services.AddTransient<CreateFamilyMemberPage>();
             builder.Services.AddTransient<ViewFamilyMembersPage>();
 

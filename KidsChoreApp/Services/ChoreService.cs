@@ -1,43 +1,41 @@
 ﻿using KidsChoreApp.Models;
+using SQLite;
 
 
 namespace KidsChoreApp.Services
 {
     public class ChoreService
     {
-        private readonly List<Chore> _chores = new();
+        private readonly SQLiteAsyncConnection _database;
 
 
-        public Task<List<Chore>> GetChoresAsync()
+        public ChoreService(SQLiteAsyncConnection database)
         {
-            return Task.FromResult(_chores);
+            _database = database;
+            _database.CreateTableAsync<Chore>().Wait();
         }
 
 
-        public Task AddChoreAsync(Chore chore)
+        public Task<List<Chore>> GetChoresByChildIdAsync(int childId)
         {
-            _chores.Add(chore);
-            return Task.CompletedTask;
+            return _database.Table<Chore>().Where(c => c.ChildId == childId).ToListAsync();
         }
 
-        public Task UpdateChoreAsync(Chore chore)
+        public Task<int> SaveChoreAsync(Chore chore)
         {
-            var existingChore = _chores.Find(c => c.Name == chore.Name);
-            if (existingChore != null)
+            if (chore.Id != 0)
             {
-                existingChore.Description = chore.Description;
-                existingChore.AssignedTo = chore.AssignedTo;
-                existingChore.Deadline = chore.Deadline;
-                existingChore.Priority = chore.Priority;
-                existingChore.IsComplete = chore.IsComplete;
+                return _database.UpdateAsync(chore);
             }
-            return Task.CompletedTask;
+            else
+            {
+                return _database.InsertAsync(chore);
+            }
         }
 
-        public Task DeleteChoreAsync(Chore chore)
+        public Task<int> DeleteChoreAsync(Chore chore)
         {
-            _chores.Remove(chore);
-            return Task.CompletedTask;
+            return _database.DeleteAsync(chore);
         }
     }
 }

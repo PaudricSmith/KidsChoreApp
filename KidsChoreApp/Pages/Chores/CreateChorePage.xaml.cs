@@ -6,15 +6,15 @@ namespace KidsChoreApp.Pages.Chores
 {
     public partial class CreateChorePage : ContentPage
     {
-        private readonly ChoreDatabase _choreDatabase;
+        private readonly ChoreService _choreService;
         private readonly ChildService _childService;
 
 
-        public CreateChorePage(ChoreDatabase choreDatabase, ChildService childService)
+        public CreateChorePage(ChoreService choreDatabase, ChildService childService)
         {
             InitializeComponent();
 
-            _choreDatabase = choreDatabase;
+            _choreService = choreDatabase;
             _childService = childService;
 
             LoadFamilyMembers();
@@ -50,7 +50,7 @@ namespace KidsChoreApp.Pages.Chores
                 IsComplete = false
             };
 
-            await _choreDatabase.SaveChoreAsync(chore);
+            await _choreService.SaveChoreAsync(chore);
             await DisplayAlert("Success", "Chore created successfully", "OK");
             await Navigation.PopAsync();
         }

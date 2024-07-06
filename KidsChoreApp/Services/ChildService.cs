@@ -8,6 +8,7 @@ namespace KidsChoreApp.Services
     {
         private readonly SQLiteAsyncConnection _database;
 
+
         public ChildService(SQLiteAsyncConnection database)
         {
             _database = database;
@@ -20,7 +21,7 @@ namespace KidsChoreApp.Services
             return await _database.Table<Child>().Where(c => c.UserId == userId).ToListAsync();
         }
 
-        public Task<Child> GetChildAsync(int id)
+        public Task<Child> GetChildByIdAsync(int id)
         {
             return _database.Table<Child>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
