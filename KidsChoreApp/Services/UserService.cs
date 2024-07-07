@@ -18,9 +18,9 @@ namespace KidsChoreApp.Services
         }
 
 
-        public Task<User> GetUserByIdAsync(int id)
+        public async Task<User> GetUserByIdAsync(int id)
         {
-            return _database.Table<User>().FirstOrDefaultAsync(u => u.Id == id);
+            return await _database.Table<User>().FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<User> GetUserByEmailAsync(string email)
@@ -60,8 +60,7 @@ namespace KidsChoreApp.Services
 
         private string HashPassword(string password)
         {
-            using var sha256 = SHA256.Create();
-            var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+            var hashedBytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
 
             return Convert.ToBase64String(hashedBytes);
         }

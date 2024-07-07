@@ -16,26 +16,26 @@ namespace KidsChoreApp.Services
         }
 
 
-        public Task<List<Chore>> GetChoresByChildIdAsync(int childId)
+        public async Task<List<Chore>> GetChoresByChildIdAsync(int childId)
         {
-            return _database.Table<Chore>().Where(c => c.ChildId == childId).ToListAsync();
+            return await _database.Table<Chore>().Where(c => c.ChildId == childId).ToListAsync();
         }
 
-        public Task<int> SaveChoreAsync(Chore chore)
+        public async Task SaveChoreAsync(Chore chore)
         {
             if (chore.Id != 0)
             {
-                return _database.UpdateAsync(chore);
+                await _database.UpdateAsync(chore);
             }
             else
             {
-                return _database.InsertAsync(chore);
+                await _database.InsertAsync(chore);
             }
         }
 
-        public Task<int> DeleteChoreAsync(Chore chore)
+        public async Task<int> DeleteChoreAsync(Chore chore)
         {
-            return _database.DeleteAsync(chore);
+            return await _database.DeleteAsync(chore);
         }
     }
 }

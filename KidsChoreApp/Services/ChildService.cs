@@ -21,9 +21,9 @@ namespace KidsChoreApp.Services
             return await _database.Table<Child>().Where(c => c.UserId == userId).ToListAsync();
         }
 
-        public Task<Child> GetChildByIdAsync(int id)
+        public async Task<Child> GetChildByIdAsync(int id)
         {
-            return _database.Table<Child>().Where(i => i.Id == id).FirstOrDefaultAsync();
+            return await _database.Table<Child>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task SaveChildAsync(Child child)
@@ -38,9 +38,9 @@ namespace KidsChoreApp.Services
             }
         }
 
-        public Task<int> DeleteChildAsync(Child child)
+        public async Task<int> DeleteChildAsync(Child child)
         {
-            return _database.DeleteAsync(child);
+            return await _database.DeleteAsync(child);
         }
 
         public async Task<bool> ChildExistsAsync(string name)

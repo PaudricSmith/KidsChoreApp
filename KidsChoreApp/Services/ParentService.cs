@@ -16,20 +16,20 @@ namespace KidsChoreApp.Services
         }
 
 
-        public Task<Parent> GetParentByUserIdAsync(int userId)
+        public async Task<Parent> GetParentByUserIdAsync(int userId)
         {
-            return _database.Table<Parent>().Where(p => p.UserId == userId).FirstOrDefaultAsync();
+            return await _database.Table<Parent>().Where(p => p.UserId == userId).FirstOrDefaultAsync();
         }
 
-        public Task<int> SaveParentAsync(Parent parent)
+        public async Task SaveParentAsync(Parent parent)
         {
             if (parent.Id != 0)
             {
-                return _database.UpdateAsync(parent);
+                await _database.UpdateAsync(parent);
             }
             else
             {
-                return _database.InsertAsync(parent);
+                await _database.InsertAsync(parent);
             }
         }
 
@@ -38,9 +38,9 @@ namespace KidsChoreApp.Services
             await _database.UpdateAsync(parent);
         }
 
-        public Task<int> DeleteParentAsync(Parent parent)
+        public async Task<int> DeleteParentAsync(Parent parent)
         {
-            return _database.DeleteAsync(parent);
+            return await _database.DeleteAsync(parent);
         }
     }
 }
