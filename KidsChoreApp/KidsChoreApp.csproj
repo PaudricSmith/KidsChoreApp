@@ -39,12 +39,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#512BD4" /> <!--ForegroundFile="Resources\AppIcon\appiconfg.svg"-->
-
+		<!-- App Icon --> <!--ForegroundFile="Resources\AppIcon\appiconfg.svg"-->
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#512BD4" />
+    
     <!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="Black" />
-
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="Black" />
+    
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
@@ -117,10 +117,6 @@
 	  <MauiXaml Update="Views\KeypadView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Resources\Splash\" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionKidsChoreAppHideInfoBar="True" /></VisualStudio></ProjectExtensions>
