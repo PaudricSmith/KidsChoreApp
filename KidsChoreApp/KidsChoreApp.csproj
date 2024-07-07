@@ -40,10 +40,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#512BD4" /> <!--ForegroundFile="Resources\AppIcon\appiconfg.svg"-->
 
-		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+    <!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="Black" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -117,6 +117,10 @@
 	  <MauiXaml Update="Views\KeypadView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Resources\Splash\" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionKidsChoreAppHideInfoBar="True" /></VisualStudio></ProjectExtensions>
