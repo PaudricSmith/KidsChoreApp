@@ -46,6 +46,7 @@ namespace KidsChoreApp.Services
                 PreferredCurrency = "EUR" // Default to Euro currency
             };
 
+            // Create new User
             await _database.InsertAsync(newUser);
             return true;
         }

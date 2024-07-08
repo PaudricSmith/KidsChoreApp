@@ -21,16 +21,9 @@ namespace KidsChoreApp.Services
             return await _database.Table<Parent>().Where(p => p.UserId == userId).FirstOrDefaultAsync();
         }
 
-        public async Task SaveParentAsync(Parent parent)
+        public async Task CreateParentAsync(Parent parent)
         {
-            if (parent.Id != 0)
-            {
-                await _database.UpdateAsync(parent);
-            }
-            else
-            {
-                await _database.InsertAsync(parent);
-            }
+            await _database.InsertAsync(parent);
         }
 
         public async Task UpdateParentAsync(Parent parent)
