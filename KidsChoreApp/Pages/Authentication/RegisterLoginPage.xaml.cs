@@ -151,7 +151,7 @@ namespace KidsChoreApp.Pages.Authentication
                     // Create a new parent account
                     var parentAccount = new Parent { UserId = user.Id };
 
-                    await _parentService.SaveParentAsync(parentAccount);
+                    await _parentService.CreateParentAsync(parentAccount);
 
                     await DisplayAlert("Success", "Registration successful", "OK");
 

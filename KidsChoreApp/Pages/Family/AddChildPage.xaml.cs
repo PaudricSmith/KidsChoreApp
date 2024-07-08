@@ -92,7 +92,7 @@ namespace KidsChoreApp.Pages.Family
                     UserId = _userId
                 };
 
-                await _childService.SaveChildAsync(child);
+                await _childService.CreateChildAsync(child);
                 await Shell.Current.GoToAsync($"//{nameof(HomePage)}?userId={_userId}");
             }
             else

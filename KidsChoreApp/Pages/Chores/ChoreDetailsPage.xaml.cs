@@ -25,7 +25,7 @@ namespace KidsChoreApp.Pages.Chores
         {
             _chore.IsComplete = true;
 
-            await _choreService.SaveChoreAsync(_chore);
+            await _choreService.UpdateChoreAsync(_chore);
             await DisplayAlert("Success", "Chore marked as complete", "OK");
 
             await Navigation.PopAsync();
@@ -35,7 +35,7 @@ namespace KidsChoreApp.Pages.Chores
         {
             _chore.IsComplete = false;
 
-            await _choreService.SaveChoreAsync(_chore);
+            await _choreService.UpdateChoreAsync(_chore);
             await DisplayAlert("Success", "Chore marked as uncomplete", "OK");
 
             await Navigation.PopAsync();

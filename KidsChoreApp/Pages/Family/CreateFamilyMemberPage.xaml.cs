@@ -37,7 +37,7 @@ namespace KidsChoreApp.Pages.Family
                 //Role = RolePicker.SelectedItem.ToString()
             };
 
-            await _childService.SaveChildAsync(member);
+            await _childService.CreateChildAsync(member);
             await DisplayAlert("Success", "Child created successfully", "OK");
             await Navigation.PopAsync();
         }

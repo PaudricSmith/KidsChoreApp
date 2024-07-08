@@ -81,8 +81,8 @@ namespace KidsChoreApp.Pages.Family
 
                 chore.IsComplete = checkBox.IsChecked;
 
-                await _choreService.SaveChoreAsync(chore);
-                await _childService.SaveChildAsync(_child); // Save the updated child earnings
+                await _choreService.UpdateChoreAsync(chore); // Updated Chore completed checkbox 
+                await _childService.UpdateChildAsync(_child); // Updated Child earnings
             }
         }
 

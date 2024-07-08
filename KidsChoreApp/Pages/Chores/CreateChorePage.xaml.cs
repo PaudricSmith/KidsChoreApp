@@ -50,7 +50,7 @@ namespace KidsChoreApp.Pages.Chores
                 IsComplete = false
             };
 
-            await _choreService.SaveChoreAsync(chore);
+            await _choreService.CreateChoreAsync(chore);
             await DisplayAlert("Success", "Chore created successfully", "OK");
             await Navigation.PopAsync();
         }
