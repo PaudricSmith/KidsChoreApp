@@ -107,6 +107,10 @@
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
   </ItemGroup>
+  
+  <ItemGroup>
+    <MauiImage Include="Resources\Images\Avatars\*.png" />
+  </ItemGroup>
 
   <ProjectExtensions>
     <VisualStudio>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:family="clr-namespace:KidsChoreApp.Pages.Family"
+             x:Class="KidsChoreApp.Pages.Family.AvatarSelectionPage"
+             x:DataType="family:AvatarSelectionPage"
+             Title="Select Avatar">
+
+    <ScrollView>
+        
+        <CollectionView ItemsSource="{Binding Avatars}" SelectionMode="None">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" HasShadow="True" Margin="5"  CornerRadius="10" IsClippedToBounds="True">
+                        <Image Source="{Binding}" Aspect="AspectFill">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer 
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type family:AvatarSelectionPage}}, 
+                            Path=BindingContext.SelectAvatarCommand}" CommandParameter="{Binding .}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+    </ScrollView>
+    
+</ContentPage>
